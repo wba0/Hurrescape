@@ -6,11 +6,22 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
+const session = require('session');
+const passport = require('passport');
+const flash = require('flash');
 
+//load environment variables from .env (top)
+require("dotenv").config();
+
+//run all setup code inside this file
+require("./config/passport-config.js");
 
 mongoose.connect('mongodb://localhost/hurrescape');
 
 const app = express();
+
+
+//////////////////////////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
