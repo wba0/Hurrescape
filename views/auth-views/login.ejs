@@ -1,0 +1,25 @@
+<h2>Login</h2>
+
+
+
+<form id="form" action="/process-login" method="post">
+  <%if(flashError.length > 0){%>
+    <p class="error-message"><%= flashError %></p>
+  <%}%>
+  <%if(logoutFeedback.length > 0){%>
+    <p class="success-message"><%= logoutFeedback %></p>
+  <%}%>
+  <%if(securityFeedback.length > 0){%>
+    <p class="error-message"><%= securityFeedback %></p>
+  <%}%>
+  <label for="email">Email</label>
+  <input id="email" type="email" name="loginEmail" value="">
+  <br>
+  <label for="password">Password</label>
+  <input id="password" type="password" name="loginPassword" value="">
+  <br>
+  <button>Login</button>
+</form>
+<a href="/auth/facebook">Login with Facebook</a>
+<br>
+<a href="/auth/google">Login with Google</a>

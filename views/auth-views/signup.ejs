@@ -1,0 +1,19 @@
+<h2>Sign Up</h2>
+
+<form id="form" action="/process-signup" method="post">
+  <%if(typeof feedbackMessage !== "undefined"){%>
+    <p class "error-message">
+      <%=feedbackMessage%>
+    </p>
+    <%}%>
+      <label for="email-input">Email</label>
+      <input placeholder="name@example.com" id="email-input" type="email" name="signupEmail" value="">
+      <br>
+      <label for="password-input">Password</label>
+      <input placeholder="swordfish" id="password-input" type="password" name="signupPassword" value="">
+      <br>
+      <button>Submit</button>
+</form>
+<a href="/auth/facebook">Login with Facebook</a>
+<br>
+<a href="/auth/google">Login with Google</a>

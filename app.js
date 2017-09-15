@@ -6,9 +6,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
-const session = require('session');
-const passport = require('passport');
-const flash = require('flash');
+const session      = require('express-session');
+const passport     = require('passport');
+const flash        = require('connect-flash');
 
 //load environment variables from .env (top)
 require("dotenv").config();
@@ -21,14 +21,14 @@ mongoose.connect('mongodb://localhost/hurrescape');
 const app = express();
 
 
-//////////////////////////////////////
+////////////////////////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // default value for title local
-app.locals.title = 'Hurrescape';
+app.locals.title = 'Hurriscape';
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -39,8 +39,35 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 
+app.use(session(
+  {
+    secret: "blah blah banana jam mountain mist ocean",
+    resave: true,
+    saveUninitialized: true
+  }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use((req, res, next) => {
+  if(req.user){
+    res.locals.currentUser = req.user;
+  } else{
+    res.locals.currentUser = null;
+  }
+  next();
+});
+
 const index = require('./routes/index');
 app.use('/', index);
+
+//routes
+const myAuthRoutes = require("./routes/auth-router.js");
+app.use(myAuthRoutes);
+const myOfferRoutes = require("./routes/offer-router.js");
+app.use(myOfferRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

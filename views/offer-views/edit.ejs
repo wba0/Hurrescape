@@ -1,0 +1,11 @@
+<h2>Edit New Room</h2>
+
+<form class="form" action="/rooms/<%=roomInfo._id%>" method="post">
+  <label for="room-name-input">Name</label>
+  <input id="room-name-input" type="text" name="roomName" value="<%=roomInfo.name%>"><br>
+  <label for="room-photo-input">Photo Upload</label>
+  <input id="room-photo-input" type="file" name="roomPhoto"><br>
+  <label for="room-desc-input">Description</label>
+  <textarea id="room-desc-input" name="roomDesc" placeholder=" beautiful"><%=roomInfo.desc%></textarea><br>
+  <button>Save</button>
+</form>
