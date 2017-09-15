@@ -10,6 +10,10 @@ const offerSchema = new Schema({
   originLatLng: [
     { type: Number }
   ],
+  destination: {
+    type: String,
+    required: true
+  },
   destinationLatLng: [
     { type: Number }
   ],
