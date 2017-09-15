@@ -33,3 +33,20 @@ a {
   padding: 20px;
   width: 100%;
 }
+
+.passport-button{
+  max-width: 191px
+}
+
+.no-max-width{
+  max-width: 1920px;
+  margin-bottom: 100px;
+}
+
+.map-group{
+  width: 400px;
+  height: 300px;
+  label{
+    text-align: center;
+  }
+}

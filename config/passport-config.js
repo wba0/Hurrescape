@@ -111,40 +111,40 @@ const FbStrategy = require('passport-facebook').Strategy;
 
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-// passport.use(
-//   new GoogleStrategy(
-//     {
-//       clientID: process.env.google_app_id,
-//       clientSecret: process.env.google_app_secret,
-//       callbackURL: "/auth/google/callback",
-//       proxy: true
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       console.log(profile);
-//       UserModel.findOne(
-//         {googleID: profile.id},
-//         (err, userFromDb) => {
-//           if(err){
-//             done(err);
-//             return
-//           }
-//           if (userFromDb) {
-//             done(null, userFromDb);
-//             return;
-//           }
-//           const theUser = new UserModel({
-//             googleID: profile.id,
-//             email: profile.emails[0].value
-//           });
-//           theUser.save((err) => {
-//             if(err){
-//               done(err);
-//               return;
-//             }
-//             done(null, theUser);
-//           })
-//         }
-//       );
-//     }
-//   )
-// );
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.google_app_id,
+      clientSecret: process.env.google_app_secret,
+      callbackURL: "/auth/google/callback",
+      proxy: true
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
+      UserModel.findOne(
+        {googleID: profile.id},
+        (err, userFromDb) => {
+          if(err){
+            done(err);
+            return
+          }
+          if (userFromDb) {
+            done(null, userFromDb);
+            return;
+          }
+          const theUser = new UserModel({
+            googleID: profile.id,
+            email: profile.emails[0].value
+          });
+          theUser.save((err) => {
+            if(err){
+              done(err);
+              return;
+            }
+            done(null, theUser);
+          })
+        }
+      );
+    }
+  )
+);

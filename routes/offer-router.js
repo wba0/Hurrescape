@@ -45,12 +45,15 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       owner: req.user._id //logged in user's ID from passport
     });
     theOffer.save((err) => {
+      console.log(req.body)
+      console.log(req.body.originCityLatLng)
       if(err){
+        console.log(err);
         next(err);
         return;
       }
       req.flash("offerFeedback", "Offer added.");
-      res.redirect("offer-views/offers");
+      res.redirect("/offers");
     });
 
 });
