@@ -14,4 +14,7 @@ $(document).ready(function($) {
     $("#wu-map-img").attr("src", `http://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
   }
   });
+
+
+
 });

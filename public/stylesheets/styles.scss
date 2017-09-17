@@ -44,9 +44,16 @@ a {
 }
 
 .map-group{
-  width: 400px;
   height: 300px;
   label{
     text-align: center;
   }
+}
+.card-deck .card.origin-card,
+.card-deck .card.destination-card{
+  display: none;
+}
+
+.card-row{
+  // margin: 0 10%;
 }

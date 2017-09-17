@@ -12,234 +12,260 @@
     </p>
     <h6>To Irama</h6>
 
-<h3>Wind Map for your vicinity</h3>
+    <h3>Wind Map for your vicinity</h3>
 
-<%# <iframe width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
+    <%# <iframe width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
 
 </iframe>%>
 
-<%# <h3>Current cyclone map</h3>
+      <%# <h3>Current cyclone map</h3>
 <span id="wu-map"></span>
 <img id="wu-map-img" src="" alt="">%>
 
-    <form class="styled-form" action="/" method="post">
-      <div class="row no-max-width">
 
-        <div class="form-group col-md-6 map-group pull-left">
-          <div id="originMap"></div>
-          <label for="origin">Origin City</label>
-          <div id="pac-container">
-            <input class="form-control" id="pac-input" type="text" placeholder="Enter a location" name="originCity">
+          <div class="row no-max-width justify-content-md-center">
+
+            <div class="form-group col-md-5 map-group">
+              <div id="originMap"></div>
+              <label for="origin">Origin City</label>
+              <div id="pac-container">
+                <input class="form-control" id="pac-input" type="text" placeholder="Enter a location" name="originCity">
+              </div>
+              <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
+              <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
+            </div>
+            <div class="form-group col-md-5 map-group">
+              <div id="destinationMap"></div>
+              <label for="destination">Destination City</label>
+              <div id="pac-container-destination">
+                <input class="form-control" id="pac-input-destination" type="text" placeholder="Enter a location" name="destinationCity">
+              </div>
+              <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
+              <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+            </div>
           </div>
-          <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
-          <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
-        </div>
-        <div class="form-group col-md-6 map-group pull-right">
-          <div id="destinationMap"></div>
-          <label for="destination">Destination City</label>
-          <div id="pac-container-destination">
-            <input class="form-control" id="pac-input-destination" type="text" placeholder="Enter a location" name="destinationCity">
+
+
+
+
+
+        <div class="row card-row">
+          <div class="col-md-4">
+
+
+
+
+            <div class="card-deck">
+              <%listOfOffers.forEach((offer) => {%>
+              <div class="card origin-card" data-origin="<%=offer.origin%>">
+              <h4 class="card-header"><%=offer.origin%></h4>
+                <img class="card-img-top" src="..." alt="Card image cap">
+
+                <ul class="list-group list-group-flush">
+  <li class="list-group-item">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i>
+Vestibulum at eros</li>
+</ul>
+                <div class="card-block">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+              </div>
+              <%})%>
+            </div>
+
+
+
           </div>
-          <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
-          <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+          <span class="col-md-1">to</span>
+          <div class="col-md-4">
+
+
+            <%listOfOffers.forEach((offer) => {%>
+
+
+              <div class="destination-card" data-destination="<%=offer.destination%>">
+                <h5><%=offer.destination%></h5>
+              </div>
+
+
+              <%})%>
+          </div>
+
+
+
+
+
+
+
+
         </div>
-      </div>
 
-    </form>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
+        <script>
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+          function initMap() {
+            var originMap = new google.maps.Map(document.getElementById('originMap'), {
+              center: {
+                lat: -33.8688,
+                lng: 151.2195
+              },
+              zoom: 14,
+              zoomControl: false,
+              mapTypeControl: false,
+              streetViewControl: false,
+              rotateControl: false,
+              fullscreenControl: false
+            });
 
+            var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
+              center: {
+                lat: -33.8688,
+                lng: 151.2195
+              },
+              zoom: 14,
+              zoomControl: false,
+              mapTypeControl: false,
+              streetViewControl: false,
+              rotateControl: false,
+              fullscreenControl: false
+            });
 
-
-    <div class="row">
-      <div class="col-md-4">
-
-        <ul>
-          <%listOfOffers.forEach((offer) => {%>
-
-
-            <li>
-              <h5><%=offer.origin%></h5> <span>to</span>
-
-            </li>
-
-            <%})%>
-        </ul>
-
-
-          <%  if(typeof searchedOrigin === "undefined"){%>
-
-          <%   } else{%>
-            <%console.log(searchedOrigin, listOfOffers)%>
-            <%let matchedOrigin = listOfOffers.filter(offer => offer.origin === "Alfred Street, Sydney, New South Wales, Australia")%>
-            <%=matchedOrigin%>
-
-        <% }%>
-
-
-      </div>
-      <div class="col-md-4">
-
-        <ul>
-          <%listOfOffers.forEach((offer) => {%>
-            <li>
-              <h5><%=offer.destination%></h5>
-
-            </li>
-
-            <%})%>
-        </ul>
-      </div>
+            var card = document.getElementById('pac-card');
+            var input = document.getElementById('pac-input');
 
 
+            var cardD = document.getElementById('pac-card-destination');
+            var inputD = document.getElementById('pac-input-destination');
+
+            originMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+            destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(cardD);
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            var autocompleteD = new google.maps.places.Autocomplete(inputD);
+
+            // Bind the map's bounds (viewport) property to the autocomplete object,
+            // so that the autocomplete requests use the current map bounds for the
+            // bounds option in the request.
+            autocomplete.bindTo('bounds', originMap);
+            autocompleteD.bindTo('bounds', destinationMap);
+
+            var infowindow = new google.maps.InfoWindow();
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var marker = new google.maps.Marker({
+              map: originMap,
+              anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            var infowindowD = new google.maps.InfoWindow();
+            var infowindowContentD = document.getElementById('infowindow-content-destination');
+            infowindowD.setContent(infowindowContentD);
+            var markerD = new google.maps.Marker({
+              map: destinationMap,
+              anchorPointD: new google.maps.Point(0, -29)
+            });
 
 
+            autocomplete.addListener('place_changed', function() {
 
 
+              //working on this ----------------------------------------------
+              var searchedOrigin = input.value;
+
+              if ($(".origin-card").attr("data-origin") === searchedOrigin) {
+                console.log(searchedOrigin);
+                $('.origin-card[data-origin="' + searchedOrigin + '"]').show();
+                // $('.origin-card[data-origin=`${searchedOrigin}`]').show();
+              }
+
+              //-----------------------------------------------------------------
+
+              infowindow.close();
+              marker.setVisible(false);
+              var place = autocomplete.getPlace();
+
+              document.getElementById("origin-lat").value = place.geometry.location.lat();
+              document.getElementById("origin-lng").value = place.geometry.location.lng();
+              // $("#origin-lat-lng").value(oLatLngArr);
+
+              if (!place.geometry) {
+
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+              }
 
 
-    </div>
+              // If the place has a geometry, then present it on a map.
+              if (place.geometry.viewport) {
+                originMap.fitBounds(place.geometry.viewport);
+              } else {
+                originMap.setCenter(place.geometry.location);
+                originMap.setZoom(17); // Why 17? Because it looks good.
+              }
+              marker.setPosition(place.geometry.location);
+              marker.setVisible(true);
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
-    <script>
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-      function initMap() {
-        var originMap = new google.maps.Map(document.getElementById('originMap'), {
-          center: {
-            lat: -33.8688,
-            lng: 151.2195
-          },
-          zoom: 14,
-          zoomControl: false,
-          mapTypeControl: false,
-          streetViewControl: false,
-          rotateControl: false,
-          fullscreenControl: false
-        });
+              var address = '';
+              if (place.address_components) {
+                address = [
+                  (place.address_components[0] && place.address_components[0].short_name || ''),
+                  (place.address_components[1] && place.address_components[1].short_name || ''),
+                  (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+              }
 
-        var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
-          center: {
-            lat: -33.8688,
-            lng: 151.2195
-          },
-          zoom: 14,
-          zoomControl: false,
-          mapTypeControl: false,
-          streetViewControl: false,
-          rotateControl: false,
-          fullscreenControl: false
-        });
+            });
 
-        var card = document.getElementById('pac-card');
-        var input = document.getElementById('pac-input');
+            autocompleteD.addListener('place_changed', function() {
 
+              //working on this ----------------------------------------------
+              var searchedDestination = inputD.value;
 
-        var cardD = document.getElementById('pac-card-destination');
-        var inputD = document.getElementById('pac-input-destination');
+              if ($(".destination-card").attr("data-destination") === searchedDestination) {
+                console.log(searchedDestination);
+                $('.destination-card[data-destination="' + searchedDestination + '"]').show();
+                // $('.origin-card[data-origin=`${searchedOrigin}`]').show();
+              }
 
-        originMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-        destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(cardD);
+              //-----------------------------------------------------------------
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        var autocompleteD = new google.maps.places.Autocomplete(inputD);
+              infowindowD.close();
+              markerD.setVisible(false);
+              var placeD = autocompleteD.getPlace();
+              document.getElementById("destination-lat").value = placeD.geometry.location.lat();
+              document.getElementById("destination-lng").value = placeD.geometry.location.lng();
+              if (!placeD.geometry) {
 
-        // Bind the map's bounds (viewport) property to the autocomplete object,
-        // so that the autocomplete requests use the current map bounds for the
-        // bounds option in the request.
-        autocomplete.bindTo('bounds', originMap);
-        autocompleteD.bindTo('bounds', destinationMap);
+                window.alert("No details available for input: '" + placeD.name + "'");
+                return;
+              }
 
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: originMap,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
+              // If the place has a geometry, then present it on a map.
+              if (placeD.geometry.viewport) {
+                destinationMap.fitBounds(placeD.geometry.viewport);
+              } else {
+                destinationMap.setCenter(placeD.geometry.location);
+                destinationMap.setZoom(17); // Why 17? Because it looks good.
+              }
+              markerD.setPosition(placeD.geometry.location);
+              markerD.setVisible(true);
 
-        var infowindowD = new google.maps.InfoWindow();
-        var infowindowContentD = document.getElementById('infowindow-content-destination');
-        infowindowD.setContent(infowindowContentD);
-        var markerD = new google.maps.Marker({
-          map: destinationMap,
-          anchorPointD: new google.maps.Point(0, -29)
-        });
+              var addressD = '';
+              if (placeD.address_components) {
+                addressD = [
+                  (placeD.address_components[0] && placeD.address_components[0].short_name || ''),
+                  (placeD.address_components[1] && placeD.address_components[1].short_name || ''),
+                  (placeD.address_components[2] && placeD.address_components[2].short_name || '')
+                ].join(' ');
+              }
 
+            });
 
-        autocomplete.addListener('place_changed', function() {
-
-          var searchedOrigin = input.value;
-          console.log(listOfOffers)
-          // document.getElementById("fillMe").innerHTML = searchedOrigin;
-
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-
-          document.getElementById("origin-lat").value = place.geometry.location.lat();
-          document.getElementById("origin-lng").value = place.geometry.location.lng();
-          // $("#origin-lat-lng").value(oLatLngArr);
-
-          if (!place.geometry) {
-
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
           }
-
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            originMap.fitBounds(place.geometry.viewport);
-          } else {
-            originMap.setCenter(place.geometry.location);
-            originMap.setZoom(17); // Why 17? Because it looks good.
-          }
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-
-          var address = '';
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-        });
-
-        autocompleteD.addListener('place_changed', function() {
-          infowindowD.close();
-          markerD.setVisible(false);
-          var placeD = autocompleteD.getPlace();
-          document.getElementById("destination-lat").value = placeD.geometry.location.lat();
-          document.getElementById("destination-lng").value = placeD.geometry.location.lng();
-          if (!placeD.geometry) {
-
-            window.alert("No details available for input: '" + placeD.name + "'");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (placeD.geometry.viewport) {
-            destinationMap.fitBounds(placeD.geometry.viewport);
-          } else {
-            destinationMap.setCenter(placeD.geometry.location);
-            destinationMap.setZoom(17); // Why 17? Because it looks good.
-          }
-          markerD.setPosition(placeD.geometry.location);
-          markerD.setVisible(true);
-
-          var addressD = '';
-          if (placeD.address_components) {
-            addressD = [
-              (placeD.address_components[0] && placeD.address_components[0].short_name || ''),
-              (placeD.address_components[1] && placeD.address_components[1].short_name || ''),
-              (placeD.address_components[2] && placeD.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-        });
-
-      }
-    </script>
+        </script>
