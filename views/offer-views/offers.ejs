@@ -7,26 +7,18 @@
 
 
 
+<div id="directionMap"></div>
 <form class="styled-form" action="/offers" method="post">
   <div class="row no-max-width">
-
     <div class="form-group col-md-6 map-group pull-left">
-      <div id="originMap"></div>
       <label for="origin">Origin City</label>
-      <div id="pac-container">
-        <input class="form-control" id="pac-input" type="text" placeholder="Enter a location" name="originCity">
-      </div>
-      <%# <input class="form-control" id="origin" type="text" name="originCity" placeholder="Miami">%>
+        <input class="form-control" id="origin-input" type="text" placeholder="Enter a location" name="originCity">
         <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
         <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
     </div>
     <div class="form-group col-md-6 map-group pull-right">
-      <div id="destinationMap"></div>
       <label for="destination">Destination City</label>
-      <div id="pac-container-destination">
-        <input class="form-control" id="pac-input-destination" type="text" placeholder="Enter a location" name="destinationCity">
-      </div>
-      <%# <input class="form-control" id="destination" type="text" name="destinationCity" placeholder="Orlando">%>
+        <input class="form-control" id="destination-input" type="text" placeholder="Enter a location" name="destinationCity">
         <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
         <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
     </div>
@@ -98,141 +90,136 @@
     <%})%>
 </ul>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
-<script>
-  // This example requires the Places library. Include the libraries=places
-  // parameter when you first load the API. For example:
-  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-  function initMap() {
-    var originMap = new google.maps.Map(document.getElementById('originMap'), {
-      center: {
-        lat: -33.8688,
-        lng: 151.2195
-      },
-      zoom: 14,
-      zoomControl: false,
-      mapTypeControl: false,
-      streetViewControl: false,
-      rotateControl: false,
-      fullscreenControl: false
-    });
+<%# <input id="origin-input" class="controls" type="text"
+        placeholder="Enter an origin location">
 
-    var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
-      center: {
-        lat: -33.8688,
-        lng: 151.2195
-      },
-      zoom: 14,
-      zoomControl: false,
-      mapTypeControl: false,
-      streetViewControl: false,
-      rotateControl: false,
-      fullscreenControl: false
-    });
+    <input id="destination-input" class="controls" type="text"
+        placeholder="Enter a destination location">
 
-    var card = document.getElementById('pac-card');
-    var input = document.getElementById('pac-input');
-    var cardD = document.getElementById('pac-card-destination');
-    var inputD = document.getElementById('pac-input-destination');
+    <div id="mode-selector" class="controls">
+      <input type="radio" name="type" id="changemode-walking" checked="checked">
+      <label for="changemode-walking">Walking</label>
 
-    originMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-    destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(cardD);
+      <input type="radio" name="type" id="changemode-transit">
+      <label for="changemode-transit">Transit</label>
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    var autocompleteD = new google.maps.places.Autocomplete(inputD);
-
-    // Bind the map's bounds (viewport) property to the autocomplete object,
-    // so that the autocomplete requests use the current map bounds for the
-    // bounds option in the request.
-    autocomplete.bindTo('bounds', originMap);
-    autocompleteD.bindTo('bounds', destinationMap);
-
-    var infowindow = new google.maps.InfoWindow();
-    var infowindowContent = document.getElementById('infowindow-content');
-    infowindow.setContent(infowindowContent);
-    var marker = new google.maps.Marker({
-      map: originMap,
-      anchorPoint: new google.maps.Point(0, -29)
-    });
-
-    var infowindowD = new google.maps.InfoWindow();
-    var infowindowContentD = document.getElementById('infowindow-content-destination');
-    infowindowD.setContent(infowindowContentD);
-    var markerD = new google.maps.Marker({
-      map: destinationMap,
-      anchorPointD: new google.maps.Point(0, -29)
-    });
+      <input type="radio" name="type" id="changemode-driving">
+      <label for="changemode-driving">Driving</label>
+    </div>%>
 
 
-    autocomplete.addListener('place_changed', function() {
-      infowindow.close();
-      marker.setVisible(false);
-      var place = autocomplete.getPlace();
 
-      document.getElementById("origin-lat").value = place.geometry.location.lat();
-      document.getElementById("origin-lng").value = place.geometry.location.lng();
-      // $("#origin-lat-lng").value(oLatLngArr);
 
-      if (!place.geometry) {
+       <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap">
+       </script>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('directionMap'), {
+          mapTypeControl: false,
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 12,
+          zoomControl: false,
+          mapTypeControl: false,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false
+        });
+
+        new AutocompleteDirectionsHandler(map);
       }
 
+       /**
+        * @constructor
+       */
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'DRIVING';
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
 
-      // If the place has a geometry, then present it on a map.
-      if (place.geometry.viewport) {
-        originMap.fitBounds(place.geometry.viewport);
-      } else {
-        originMap.setCenter(place.geometry.location);
-        originMap.setZoom(17); // Why 17? Because it looks good.
-      }
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
 
-      var address = '';
-      if (place.address_components) {
-        address = [
-          (place.address_components[0] && place.address_components[0].short_name || ''),
-          (place.address_components[1] && place.address_components[1].short_name || ''),
-          (place.address_components[2] && place.address_components[2].short_name || '')
-        ].join(' ');
-      }
+        // this.setupClickListener('changemode-walking', 'WALKING');
+        // this.setupClickListener('changemode-transit', 'TRANSIT');
+        // this.setupClickListener('changemode-driving', 'DRIVING');
 
-    });
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
-    autocompleteD.addListener('place_changed', function() {
-      infowindowD.close();
-      markerD.setVisible(false);
-      var placeD = autocomplete.getPlace();
-      document.getElementById("destination-lat").value = placeD.geometry.location.lat();
-      document.getElementById("destination-lng").value = placeD.geometry.location.lng();
-      if (!placeD.geometry) {
-
-        window.alert("No details available for input: '" + placeD.name + "'");
-        return;
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
       }
 
-      // If the place has a geometry, then present it on a map.
-      if (placeD.geometry.viewport) {
-        destinationMap.fitBounds(placeD.geometry.viewport);
-      } else {
-        destinationMap.setCenter(placeD.geometry.location);
-        destinationMap.setZoom(17); // Why 17? Because it looks good.
-      }
-      markerD.setPosition(placeD.geometry.location);
-      markerD.setVisible(true);
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
+      };
 
-      var addressD = '';
-      if (placeD.address_components) {
-        addressD = [
-          (placeD.address_components[0] && placeD.address_components[0].short_name || ''),
-          (placeD.address_components[1] && placeD.address_components[1].short_name || ''),
-          (placeD.address_components[2] && placeD.address_components[2].short_name || '')
-        ].join(' ');
-      }
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
 
-    });
+      };
 
-  }
-</script>
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+
+            // console.log(document.getElementById("origin-input").value);
+            document.getElementById("origin-lat").value = response.routes["0"].legs["0"].start_location.lat();
+            document.getElementById("origin-lng").value = response.routes["0"].legs["0"].start_location.lng();
+            document.getElementById("destination-lat").value = response.routes["0"].legs["0"].end_location.lat();
+            document.getElementById("destination-lng").value = response.routes["0"].legs["0"].end_location.lng();
+            document.getElementById("origin-input").value = this.origin;
+            me.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
+
+    </script>
+   </script>

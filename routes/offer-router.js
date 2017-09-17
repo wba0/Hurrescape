@@ -22,6 +22,8 @@ router.get("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
         // res.locals.updateFeedback = req.flash("updateSuccess");
         res.locals.listOfOffers = offersFromDb;
         res.render("offer-views/offers.ejs");
+
+
       }
   );
 
@@ -46,7 +48,7 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
     });
     theOffer.save((err) => {
       console.log(req.body)
-      console.log(req.body.originCityLatLng)
+      console.log("origin city---> ", req.body.originCity)
       if(err){
         console.log(err);
         next(err);
