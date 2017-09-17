@@ -5,12 +5,7 @@
 
   <%}%>
 
-
-    <h1><%= title %></h1>
-    <p>Welcome to
-      <%= title %>
-    </p>
-    <h6>To Irama</h6>
+    <h6>Dedicated to Irma</h6>
 
     <h3>Wind Map for your vicinity</h3>
 
@@ -59,18 +54,31 @@
               <%listOfOffers.forEach((offer) => {%>
                 <div class="card origin-card" data-origin="<%=offer.origin%>">
                   <h4 class="card-header"><%=offer.origin%></h4>
-                  <img class="card-img-top" src="..." alt="Card image cap">
-
+                  <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap">
+                  <h5><%=offer.owner%></h5>
+                  <div class="row">
+                  <div class="col-md-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i><%=offer.car%>
+</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i> Vestibulum at eros</li>
+                  </ul>
+                  </div>
+                  <div class="col-md-6">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Cras justo odio</li>
                     <li class="list-group-item">Dapibus ac facilisis in</li>
                     <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i> Vestibulum at eros</li>
                   </ul>
-                  <div class="card-block">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+
                   </div>
+
+                  // <div class="card-block">
+                  //   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  // </div>
                   <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">Created on 3 mins ago</small> //where is my createdAt?
                   </div>
                 </div>
                 <%})%>
@@ -86,7 +94,7 @@
             <%listOfOffers.forEach((offer) => {%>
 
 
-              <div class="destination-card" data-destination="<%=offer.destination%>">
+              <div class="card destination-card" data-destination="<%=offer.destination%>">
                 <h5><%=offer.destination%></h5>
               </div>
 

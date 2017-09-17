@@ -45,6 +45,9 @@ const offerSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     required: true
+  },
+  ownerAvatar: {
+    type: String
   }
 },
  {

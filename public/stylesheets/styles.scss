@@ -74,3 +74,25 @@ a {
   width: 400px;
 
 }
+
+.navbar-email{
+  display: inline-block;
+}
+
+.navbar-avatar{
+  width: 50px;
+  border-radius: 50px;
+}
+
+.offer-avatar{
+  width: 120px;
+  border-radius: 100px;
+  padding: 10px;
+}
+
+.offer-info-line{
+  font-size: 2em;
+  i{
+    padding-right: 10px;
+  }
+}

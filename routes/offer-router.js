@@ -43,8 +43,8 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       departureDate: req.body.departureDate,
       departureTime: req.body.departureTime,
       barter: req.body.barterItem,
-
-      owner: req.user._id //logged in user's ID from passport
+      owner: req.user._id, //logged in user's ID from passport
+      ownerAvatar: req.user.avatarUrl
     });
     theOffer.save((err) => {
       console.log(req.body)

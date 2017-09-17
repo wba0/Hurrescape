@@ -2,7 +2,15 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const UserModel = require("../models/user-model.js")
+const UserModel = require("../models/user-model.js");
+const multer = require('multer');
+
+const myUploader = multer(
+  {
+    dest: __dirname + "/../public/uploads"
+  }
+);
+
 
 router.get("/signup", (req, res, next) => {
   if(req.user){
@@ -12,7 +20,7 @@ router.get("/signup", (req, res, next) => {
   res.render("auth-views/signup.ejs");
 });
 
-router.post("/process-signup", (req, res, next) => {
+router.post("/process-signup", myUploader.single("avatarUrl"), (req, res, next) => {
   if (req.body.signupEmail === "" || req.body.signupPassword === "") {
     res.locals.feedbackMessage = "We need both email and password";
     res.render("auth-views/signup.ejs");
@@ -36,7 +44,8 @@ router.post("/process-signup", (req, res, next) => {
 
       const theUser = new UserModel({
         email: req.body.signupEmail,
-        encryptedPassword: scrambledPass
+        encryptedPassword: scrambledPass,
+        avatarUrl: "/uploads/" + req.file.filename
       });
       theUser.save((err) => {
         if (err) {

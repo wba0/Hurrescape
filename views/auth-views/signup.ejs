@@ -3,7 +3,7 @@
 
 <div class="container">
 
-      <form class="form-signin" id="form" action="/process-signup" method="post">
+      <form class="form-signin" id="form" action="/process-signup" method="post"  enctype="multipart/form-data">
         <%if(typeof feedbackMessage !== "undefined"){%>
           <p class "error-message">
           <%=feedbackMessage%>
@@ -15,6 +15,9 @@
         <br>
         <label for="password-input">Password</label>
         <input class="form-control" placeholder="swordfish" id="password-input" type="password" name="signupPassword" value="">
+        <br>
+        <label for="avatar-url">Avatar (optional)</label>
+        <input class="form-control" id="avatar-url" type="file" name="avatarUrl" value="">
         <br>
         <button class="btn btn-lg btn-primary btn-block">Submit</button>
         <div class="alt-signins">
