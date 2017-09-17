@@ -1,25 +1,32 @@
-<h2>Login</h2>
-
-
-
-<form id="form" action="/process-login" method="post">
+<form class="form-signin" id="form" action="/process-login" method="post">
   <%if(flashError.length > 0){%>
-    <p class="error-message"><%= flashError %></p>
-  <%}%>
-  <%if(logoutFeedback.length > 0){%>
-    <p class="success-message"><%= logoutFeedback %></p>
-  <%}%>
-  <%if(securityFeedback.length > 0){%>
-    <p class="error-message"><%= securityFeedback %></p>
-  <%}%>
-  <label for="email">Email</label>
-  <input id="email" type="email" name="loginEmail" value="">
-  <br>
-  <label for="password">Password</label>
-  <input id="password" type="password" name="loginPassword" value="">
-  <br>
-  <button>Login</button>
+    <p class="error-message">
+      <%= flashError %>
+    </p>
+    <%}%>
+      <%if(logoutFeedback.length > 0){%>
+        <p class="success-message">
+          <%= logoutFeedback %>
+        </p>
+        <%}%>
+          <%if(securityFeedback.length > 0){%>
+            <p class="error-message">
+              <%= securityFeedback %>
+            </p>
+            <%}%>
+              <h2 class="form-signin-heading">Please log in</h2>
+
+              <label for="email">Email</label>
+              <input class="form-control" placeholder="name@example.com"  id="email" type="email" name="loginEmail" value="">
+              <br>
+              <label for="password">Password</label>
+              <input class="form-control" placeholder="swordfish"  id="password" type="password" name="loginPassword" value="">
+              <br>
+              <button class="btn btn-lg btn-primary btn-block">Login</button>
+              <div class="alt-signins">
+
+                <a href="/auth/facebook"><img class="passport-button" src="images/fbsignin.png" alt=""></a>
+
+                <a href="/auth/google"><img class="passport-button" src="images/googlesignin.png" alt=""></a>
+              </div>
 </form>
-<a href="/auth/facebook"><img class="passport-button" src="images/fbsignin.png" alt=""></a>
-<br>
-<a href="/auth/google"><img class="passport-button" src="images/googlesignin.png" alt=""></a>

@@ -2,7 +2,7 @@
   <p class="success-message">
     <%=signupFeedback%>
   </p>
-  return;
+
   <%}%>
 
 
@@ -23,27 +23,27 @@
 <img id="wu-map-img" src="" alt="">%>
 
 
-          <div class="row no-max-width justify-content-md-center">
+        <div class="row no-max-width justify-content-md-center">
 
-            <div class="form-group col-md-5 map-group">
-              <div id="originMap"></div>
-              <label for="origin">Origin City</label>
-              <div id="pac-container">
-                <input class="form-control" id="pac-input" type="text" placeholder="Enter a location" name="originCity">
-              </div>
-              <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
-              <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
+          <div class="form-group col-md-5 map-group">
+            <div id="originMap"></div>
+            <label for="origin">Origin City</label>
+            <div id="pac-container">
+              <input class="form-control" id="pac-input" type="text" placeholder="Enter a location" name="originCity">
             </div>
-            <div class="form-group col-md-5 map-group">
-              <div id="destinationMap"></div>
-              <label for="destination">Destination City</label>
-              <div id="pac-container-destination">
-                <input class="form-control" id="pac-input-destination" type="text" placeholder="Enter a location" name="destinationCity">
-              </div>
-              <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
-              <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
-            </div>
+            <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
+            <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
           </div>
+          <div class="form-group col-md-5 map-group">
+            <div id="destinationMap"></div>
+            <label for="destination">Destination City</label>
+            <div id="pac-container-destination">
+              <input class="form-control" id="pac-input-destination" type="text" placeholder="Enter a location" name="destinationCity">
+            </div>
+            <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
+            <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+          </div>
+        </div>
 
 
 
@@ -57,24 +57,23 @@
 
             <div class="card-deck">
               <%listOfOffers.forEach((offer) => {%>
-              <div class="card origin-card" data-origin="<%=offer.origin%>">
-              <h4 class="card-header"><%=offer.origin%></h4>
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card origin-card" data-origin="<%=offer.origin%>">
+                  <h4 class="card-header"><%=offer.origin%></h4>
+                  <img class="card-img-top" src="..." alt="Card image cap">
 
-                <ul class="list-group list-group-flush">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i>
-Vestibulum at eros</li>
-</ul>
-                <div class="card-block">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i> Vestibulum at eros</li>
+                  </ul>
+                  <div class="card-block">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </div>
                 </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-              <%})%>
+                <%})%>
             </div>
 
 

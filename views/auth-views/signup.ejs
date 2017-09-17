@@ -1,19 +1,26 @@
 <h2>Sign Up</h2>
 
-<form id="form" action="/process-signup" method="post">
-  <%if(typeof feedbackMessage !== "undefined"){%>
-    <p class "error-message">
-      <%=feedbackMessage%>
-    </p>
-    <%}%>
-      <label for="email-input">Email</label>
-      <input placeholder="name@example.com" id="email-input" type="email" name="signupEmail" value="">
-      <br>
-      <label for="password-input">Password</label>
-      <input placeholder="swordfish" id="password-input" type="password" name="signupPassword" value="">
-      <br>
-      <button>Submit</button>
-</form>
-<a href="/auth/facebook">Login with Facebook</a>
-<br>
-<a href="/auth/google">Login with Google</a>
+
+<div class="container">
+
+      <form class="form-signin" id="form" action="/process-signup" method="post">
+        <%if(typeof feedbackMessage !== "undefined"){%>
+          <p class "error-message">
+          <%=feedbackMessage%>
+          </p>
+          <%}%>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="email-input">Email</label>
+        <input class="form-control" placeholder="name@example.com" id="email-input" type="email" name="signupEmail" value="">
+        <br>
+        <label for="password-input">Password</label>
+        <input class="form-control" placeholder="swordfish" id="password-input" type="password" name="signupPassword" value="">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block">Submit</button>
+        <div class="alt-signins">
+          <a href="/auth/facebook"><img class="passport-button" src="images/fbsignin.png" alt=""></a>
+          <a href="/auth/google"><img class="passport-button" src="images/googlesignin.png" alt=""></a>
+        </div>
+      </form>
+</div>
+<!-- /container -->

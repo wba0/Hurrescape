@@ -13,17 +13,20 @@ router.get('/', (req, res, next) => {
         return;
       }
       res.locals.listOfOffers = offersFromDb;
+
+      if (req.user) {
+        res.locals.securityFeedback = req.flash("securityError");
+        res.locals.signupFeedback = req.flash("signupSuccess");
+
+        // res.render("user-home.ejs")
+      } else {
+        res.locals.signupFeedback = req.flash("signupSuccess");
+        // res.render("index.ejs")
+      }
       res.render("index.ejs")
 
     }
   );
-  if (req.user) {
-    res.locals.securityFeedback = req.flash("securityError");
-    // res.render("user-home.ejs")
-  } else {
-    res.locals.signupFeedback = req.flash("signupSuccess");
-    // res.render("index.ejs")
-  }
 
 });
 
