@@ -149,3 +149,60 @@ display: none;
 .windy-iframe{
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#route-duration-container,
+#route-distance-container{
+  display: inline-block;
+  font-size: 2em;
+  text-align: center;
+  margin: 0 auto;
+  width: 250px;
+}
+
+#route-info-pane{
+  margin: 0 auto;
+  width: 600px;
+}
+
+#slidecontainer{
+  width: 600px;
+  text-align: center;
+  *{
+    display: inline-block;
+  }
+}
+
+
+#google-map-inputs{
+  margin: 0 auto;
+  width: 600px;
+  text-align: center;
+}
+.gmaps-inner-input{
+
+}
+
+.hidden{
+  display: none;
+}

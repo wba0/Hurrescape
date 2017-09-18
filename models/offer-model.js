@@ -51,7 +51,7 @@ const offerSchema = new Schema({
   }
 },
  {
-  timeStamps: true
+  timestamps: true
 }
 );
 
