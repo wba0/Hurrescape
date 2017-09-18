@@ -44,7 +44,6 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       departureTime: req.body.departureTime,
       barter: req.body.barterItem,
       owner: req.user._id, //logged in user's ID from passport
-      ownerAvatar: req.user.avatarUrl
     });
     theOffer.save((err) => {
       console.log(req.body)
@@ -60,83 +59,73 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
 });
 
-// router.get("/myrooms", (req, res, next) => {
-//
-//   RoomModel.find(
-//     {owner: req.user._id},
-//       (err, foundRooms) => {
-//         if(err){
-//           next(err);
-//           return;
-//         }
-//         res.locals.securityFeedback = securityError;
-//         res.locals.listOfRooms = foundRooms;
-//         res.locals.updateFeedback = req.flash("updateSuccess");
-//         res.render("room-views/user-rooms.ejs")
-//       }
-//   );
-// });
-//
-// router.get("/rooms/:roomId/edit", (req, res, next) => {
-//
-//   RoomModel.findById(
-//     req.params.roomId,
-//     (err, roomFromDb) => {
-//       if(err){
-//         next(err);
-//         return;
-//       }
-//       if(roomFromDb.owner.toString() !== req.user._id.toString()){
-//         req.flash("securityError", "You can only edit your own rooms.");
-//         res.redirect("/myrooms");
-//         return;
-//       }
-//       res.locals.roomInfo = roomFromDb;
-//       res.render("room-views/room-edit.ejs")
-//     }
-//   );
-// });
-//
-// router.post("/rooms/:roomId", myUploader.single("roomPhoto"), (req, res, next) => {
-//
-//   RoomModel.findById(
-//     req.params.roomId,
-//     (err, roomFromDb) => {
-//       if(err){
-//         next(err);
-//         return;
-//       }
-//       if(roomFromDb.owner.toString() !== req.user._id.toString()){
-//         req.flash("securityError", "You can only edit your own rooms.");
-//         res.redirect("/myrooms");
-//         return;
-//       }
-//
-//       roomFromDb.name = req.body.roomName;
-//       roomFromDb.desc = req.body.roomDesc;
-//
-//       if(req.file){
-//         roomFromDb.photoUrl = "/uploads/" + req.file.filename;
-//       }
-//
-//       roomFromDb.save((err) => {
-//         if(err){
-//           next(err);
-//           return;
-//         }
-//         req.flash("updateSuccess", "Room Update Successful!");
-//         res.redirect("/myrooms");
-//       });
-//     }
-//   );
-// });
-//
 
-router.post("/offers/:id/delete", (req, res, next) => {
+// router.get("/offers/:id/edit", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+//
+//   OfferModel.findById(
+//     req.params.id,
+//     (err, offerFromDb) => {
+//       if(err){
+//         next(err);
+//         return;
+//       }
+//       if(offerFromDb.owner.toString() !== req.user._id.toString()){
+//         req.flash("securityError", "You can only edit your own rides.");
+//         res.redirect("/offers");
+//         return;
+//       }
+//       res.locals.offerInfo = offerFromDb;
+//       res.render("offer-views/offers.ejs")
+//     }
+//   );
+// });
+
+router.post("/offers/:id", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+
+  OfferModel.findById(
+    req.params.id,
+    (err, offerFromDb) => {
+      if(err){
+        next(err);
+        return;
+      }
+      if(offerFromDb.owner.toString() !== req.user._id.toString()){
+        req.flash("securityError", "You can only edit your own rides.");
+        res.redirect("/offers");
+        return;
+      }
+
+      offerFromDb.origin = req.body.originCity;
+      offerFromDb.originLatLng= req.body.originCityLatLng;
+      offerFromDb.destination= req.body.destinationCity;
+      offerFromDb.destinationLatLng= req.body.destinationCityLatLng;
+      offerFromDb.car= req.body.carType;
+      offerFromDb.spaces= req.body.spacesAvailable;
+      offerFromDb.pets= req.body.petsAccepted;
+      offerFromDb.departureDate= req.body.departureDate;
+      offerFromDb.departureTime= req.body.departureTime;
+      offerFromDb.barter= req.body.barterItem;
+      offerFromDb.owner= req.user._id; //logged in user's ID from passport
+
+      offerFromDb.save((err) => {
+        if(err){
+          next(err);
+          return;
+        }
+        req.flash("updateSuccess", "Ride Update Successful!");
+        res.redirect("/offers");
+      });
+    }
+  );
+});
+
+
+router.get("/offers/:id/delete", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   OfferModel.findByIdAndRemove(
     req.params.id,
-    (err, foundProduct) => {
+    (err, offerFromDb) => {
       if (err) {
+        console.log(err);
         next(err);
         return;
       }

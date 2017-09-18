@@ -74,7 +74,7 @@ router.get("/login", (req, res, next) => {
 router.post("/process-login",
   //name of strategy, settings obj
   passport.authenticate('local', {
-    successRedirect: "/",
+    successRedirect: "/offers",
     failureRedirect: "/login",
     failureFlash: true
   })
@@ -91,7 +91,7 @@ router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback",
 //name of strategy, settings obj
   passport.authenticate("facebook", {
-    successRedirect: "/",
+    successRedirect: "/offers",
     failureRedirect: "login",
     failureFlash: true
   })
@@ -105,7 +105,7 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 router.get("/auth/google/callback",
   passport.authenticate("google", {
-      successRedirect: "/",
+      successRedirect: "/offers",
       failureRedirect: "/login",
       failureFlash: true
   })

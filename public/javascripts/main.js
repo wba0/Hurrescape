@@ -23,7 +23,6 @@ $(document).ready(function($) {
         const hCat = hurricane.Current.SaffirSimpsonCategory;
         const hWindSpeed = hurricane.Current.WindSpeed.Mph;
         const hWindGusts = hurricane.Current.WindGust.Mph;
-        console.log(hLat, hLng);
 
         const mapUrl = `http://icons.wunderground.com/data/images/${hNumber}_5day.gif`;
         if (hCat >= 1) {
@@ -80,14 +79,6 @@ $(document).ready(function($) {
         document.getElementById('iframeid').src += '';
       }
       // btn.onclick = reload;
-
-
     }
-
-
-
   });
-
-
-
 }); //document.ready
