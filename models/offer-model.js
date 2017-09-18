@@ -54,7 +54,10 @@ const offerSchema = new Schema({
   },
   ownerAvatar: {
     type: String
-  }
+  },
+  appliedUsers:[{
+    type: String
+  }]
 },
  {
   timestamps: true

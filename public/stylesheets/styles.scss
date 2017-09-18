@@ -100,11 +100,8 @@ h3{
   padding: 10px;
 }
 
-.offer-info-line{
-  font-size: 2em;
-  i{
-    padding-right: 10px;
-  }
+.ride-card{
+  font-size: 1.2em;
 }
 
 #storm-list{
@@ -184,20 +181,23 @@ display: none;
   font-size: 2em;
   text-align: center;
   margin: 0 auto;
-  width: 200px;
+  width: 290px;
+  margin-bottom: 10px;
 }
 
 #route-info-pane{
   margin: 0 auto;
   width: 600px;
+  div{
+
+    padding-bottom: 10px;
+  }
 }
 
 #slidecontainer{
   width: 600px;
   text-align: center;
-  *{
-    display: inline-block;
-  }
+
 }
 
 
@@ -212,4 +212,19 @@ display: none;
 
 .hidden{
   display: none;
+}
+
+.fa{
+  padding-right: 5px;
+}
+
+.apply-section{
+  form{
+    margin: 0 auto;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    button{
+      margin-top: 15px;
+    }
+  }
 }

@@ -5,129 +5,143 @@
 
   <%}%>
 
+
     <h6>Dedicated to Irma</h6>
 
-    <h3>Wind Map for your vicinity</h3>
 
 
 
-    <%# <iframe id="windy-iframe" width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
+
+
+    <%# applySuccess logic%>
+
+
+
+
+
+
+      <h3>Wind Map for your vicinity</h3>
+
+
+
+      <%# <iframe id="windy-iframe" width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
 
 </iframe>%>
 
-      <div class="row">
-        <div class="col-md-2">
-          <ul class="list-group" id="storm-list">
-            <h3>Current Storm Information</h3>
+        <div class="row">
+          <div class="col-md-2">
+            <ul class="list-group" id="storm-list">
+              <h3>Current Storm Information</h3>
 
-          </ul>
+            </ul>
 
-        </div>
-
-
-        <div class="col-md-6">
-          <div id="windy-container">
-            <h3 class="text-center">Wind Map</h3>
           </div>
 
+
+          <div class="col-md-6">
+            <div id="windy-container">
+              <h3 class="text-center">Wind Map</h3>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+            <h3 class="text-center">Storm Tracking</h3>
+            <div id="tracking-container"></div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h3 class="text-center">Storm Tracking</h3>
-        <div id="tracking-container"></div>
-      </div>
-      </div>
 
 
-      <%# <h3>Current cyclone map</h3>
+        <%# <h3>Current cyclone map</h3>
 <span id="wu-map"></span>
 <img id="wu-map-img" src="" alt="">%>
+          <div id="find-ride-section">
+            <h3 class="mx-auto text-center">Find a Ride</h3>
 
-<h3 class="mx-auto text-center">Find a Ride</h3>
+            <div class="row no-max-width justify-content-md-center">
 
-        <div class="row no-max-width justify-content-md-center">
-
-          <div class="form-group col-md-5 map-group">
-            <div id="originMap"></div>
-            <label for="origin">Origin City</label>
-            <div id="pac-container">
-              <input class="form-control" id="pac-input" type="text" placeholder="Origin City" name="originCity">
+              <div class="form-group col-md-5 map-group">
+                <div id="originMap"></div>
+                <label for="origin">Origin City</label>
+                <div id="pac-container">
+                  <input class="form-control" id="pac-input" type="text" placeholder="Origin City" name="originCity">
+                </div>
+                <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
+                <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
+              </div>
+              <div class="form-group col-md-5 map-group">
+                <div id="destinationMap"></div>
+                <label for="destination">Destination City</label>
+                <div id="pac-container-destination">
+                  <input class="form-control" id="pac-input-destination" type="text" placeholder="Destination City" name="destinationCity">
+                </div>
+                <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
+                <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+              </div>
             </div>
-            <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
-            <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
-          </div>
-          <div class="form-group col-md-5 map-group">
-            <div id="destinationMap"></div>
-            <label for="destination">Destination City</label>
-            <div id="pac-container-destination">
-              <input class="form-control" id="pac-input-destination" type="text" placeholder="Destination City" name="destinationCity">
-            </div>
-            <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
-            <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
-          </div>
-        </div>
 
 
 
 
 
-        <div class="row card-row">
-          <div class="col-md-4">
+            <div class="row card-row">
+              <div class="card-deck">
+                <%listOfOffers.forEach((offer) => {%>
+                  <div class="col-md-6">
+                    <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
+                      <h4 class="card-header"><%=offer.origin%> to <%=offer.destination%></h4>
+                      <br>
+                      <h5 class="text-center"> with: <%=offer.owner.email%></h5>
+                      <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap" onerror="this.src='images/default.png'">
+                      <div class="departure-date-time text-center">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                        <%=offer.departureDate.toDateString()%><br>
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          <%=offer.departureTime%>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i>
+                              <%=offer.car%>
+                            </li>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-users" aria-hidden="true"></i>
+                              <%=offer.spaces%>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-6">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item offer-info-line"><i class="fa fa-paw" aria-hidden="true"></i>
 
+                              <%if(offer.pets === "true"){ %>
+                                <span>allowed!</span>
+                                <%} else {%>
+                                  <span>no</span>
+                                  <%}%>
+                            </li>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-exchange" aria-hidden="true"></i>
+                              <%=offer.barter%>
+                            </li>
+                          </ul>
 
+                        </div>
 
-
-            <div class="card-deck">
-              <%listOfOffers.forEach((offer) => {%>
-                <div class="card origin-card" data-origin="<%=offer.origin%>">
-                  <h4 class="card-header"><%=offer.origin%></h4>
-                  <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap">
-                  <h5><%=offer.owner%></h5>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i>
-                          <%=offer.car%>
-                        </li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i> Vestibulum at eros</li>
-                      </ul>
-                    </div>
-                    <div class="col-md-6">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item"><i class="fa fa-address-book" aria-hidden="true"></i> Vestibulum at eros</li>
-                      </ul>
-
-                    </div>
-
-                    //
-                    <div class="card-block">
-                      //
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      // </div>
-                    <div class="card-footer">
-                      <small class="text-muted">Created on 3 mins ago</small> //where is my createdAt?
+                      </div>
+                      <div class="apply-section text-center">
+                        <form method="post" action="/offers/:id/apply" class="styled-form">
+                          <label for="phone-number-input">Enter phone number to apply</label>
+                          <input id="phone-number-input" type="tel" name="phoneNumber" placeholder="(555)555-5555">
+                          <button class="btn btn-primary">Apply</button>
+                        </form>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-muted">Created on <%=offer.createdAt.toDateString()%></small>
+                      </div>
+                      <%})%>
                     </div>
                   </div>
-                  <%})%>
-                </div>
-
-
-
+              </div>
             </div>
-            <span class="col-md-1">to</span>
-            <div class="col-md-4">
-
-              <%listOfOffers.forEach((offer) => {%>
-
-                <div class="card destination-card" data-destination="<%=offer.destination%>">
-                  <h5><%=offer.destination%></h5>
-                </div>
-
-                <%})%>
-            </div>
-
           </div>
 
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
@@ -198,8 +212,7 @@
               });
 
 
-              autocomplete.addListener('place_changed', function()
-              {
+              autocomplete.addListener('place_changed', function() {
 
 
 
@@ -212,9 +225,10 @@
 
                 console.log(place);
 
-                if ($(".origin-card").attr("data-origin") === searchedOrigin) {
-                  $('.origin-card[data-origin="' + searchedOrigin + '"]').show();
-                  // $('.origin-card[data-origin=`${searchedOrigin}`]').show();
+                if ($(".ride-card").attr("data-origin") === searchedOrigin || $(".ride-card").attr("data-destination") === searchedDestination) {
+                  $('.ride-card[data-origin="' + searchedOrigin + '"]').show();
+                  $('.ride-card[data-destination="' + searchedDestination + '"]').show();
+                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
                 }
 
                 //-----------------------------------------------------------------
@@ -259,7 +273,7 @@
                 if ($(".destination-card").attr("data-destination") === searchedDestination) {
                   console.log(searchedDestination);
                   $('.destination-card[data-destination="' + searchedDestination + '"]').show();
-                  // $('.origin-card[data-origin=`${searchedOrigin}`]').show();
+                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
                 }
 
                 //-----------------------------------------------------------------

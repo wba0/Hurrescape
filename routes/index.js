@@ -13,7 +13,9 @@ router.get('/', (req, res, next) => {
         return;
       }
       res.locals.listOfOffers = offersFromDb;
-
+      //i want a feedback message here
+      //
+      // req.locals.applicationFeedback = req.flash("applySuccess");
       if (req.user) {
         res.locals.securityFeedback = req.flash("securityError");
         res.locals.signupFeedback = req.flash("signupSuccess");

@@ -29,7 +29,7 @@ router.get("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
 });
 
-//<form method="post" action="/rooms">
+
 router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
   const theOffer = new OfferModel({
@@ -61,26 +61,6 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
 });
 
-
-// router.get("/offers/:id/edit", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
-//
-//   OfferModel.findById(
-//     req.params.id,
-//     (err, offerFromDb) => {
-//       if(err){
-//         next(err);
-//         return;
-//       }
-//       if(offerFromDb.owner.toString() !== req.user._id.toString()){
-//         req.flash("securityError", "You can only edit your own rides.");
-//         res.redirect("/offers");
-//         return;
-//       }
-//       res.locals.offerInfo = offerFromDb;
-//       res.render("offer-views/offers.ejs")
-//     }
-//   );
-// });
 
 router.post("/offers/:id", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
@@ -135,6 +115,29 @@ router.get("/offers/:id/delete", ensureLogin.ensureLoggedIn("/"), (req, res, nex
       }
       res.redirect("/offers");
     });
+  });
+
+
+router.post("/offers/:id/apply", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+      OfferModel.findById(
+      req.params.id,
+      (err, offerFromDb) => {
+        if(err){
+          next(err);
+          return;
+        }
+        offerFromDb.appliedUsers.push(req.body.phoneNumber);
+        offerFromDb.save((err) => {
+          if(err){
+            next(err);
+            return;
+          }
+          req.flash("applySuccess", "Application succesful. Wait for reply from owner.")
+          res.redirect("/");
+        });
+      }
+    );
+
   });
 
 module.exports = router;
