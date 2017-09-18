@@ -17,6 +17,12 @@ const offerSchema = new Schema({
   destinationLatLng: [
     { type: Number }
   ],
+  originPlaceId: {
+    type: String
+  },
+  destinationPlaceId: {
+    type: String
+  },
   car: {
     type: String,
     required: true

@@ -37,6 +37,8 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       originLatLng: req.body.originCityLatLng,
       destination: req.body.destinationCity,
       destinationLatLng: req.body.destinationCityLatLng,
+      originPlaceId: req.body.originPlaceId,
+      destinationPlaceId: req.body.destinationPlaceId,
       car: req.body.carType,
       spaces: req.body.spacesAvailable,
       pets: req.body.petsAccepted,
@@ -96,16 +98,18 @@ router.post("/offers/:id", ensureLogin.ensureLoggedIn("/"), (req, res, next) => 
       }
 
       offerFromDb.origin = req.body.originCity;
-      offerFromDb.originLatLng= req.body.originCityLatLng;
-      offerFromDb.destination= req.body.destinationCity;
-      offerFromDb.destinationLatLng= req.body.destinationCityLatLng;
-      offerFromDb.car= req.body.carType;
-      offerFromDb.spaces= req.body.spacesAvailable;
-      offerFromDb.pets= req.body.petsAccepted;
-      offerFromDb.departureDate= req.body.departureDate;
-      offerFromDb.departureTime= req.body.departureTime;
-      offerFromDb.barter= req.body.barterItem;
-      offerFromDb.owner= req.user._id; //logged in user's ID from passport
+      offerFromDb.originLatLng = req.body.originCityLatLng;
+      offerFromDb.destination = req.body.destinationCity;
+      offerFromDb.destinationLatLng = req.body.destinationCityLatLng;
+      offerFromDb.originPlaceId = req.body.originPlaceId;
+      offerFromDb.destinationPlaceId = req.body.destinationPlaceId;
+      offerFromDb.car = req.body.carType;
+      offerFromDb.spaces = req.body.spacesAvailable;
+      offerFromDb.pets = req.body.petsAccepted;
+      offerFromDb.departureDate = req.body.departureDate;
+      offerFromDb.departureTime = req.body.departureTime;
+      offerFromDb.barter = req.body.barterItem;
+      offerFromDb.owner = req.user._id; //logged in user's ID from passport
 
       offerFromDb.save((err) => {
         if(err){

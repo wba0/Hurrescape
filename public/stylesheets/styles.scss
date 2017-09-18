@@ -10,6 +10,13 @@ a {
   color: #00B7FF;
 }
 
+h1,
+h2,
+h3{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .styled-form{
   max-width: 600px;
   margin: 0 auto;
@@ -177,7 +184,7 @@ display: none;
   font-size: 2em;
   text-align: center;
   margin: 0 auto;
-  width: 250px;
+  width: 200px;
 }
 
 #route-info-pane{

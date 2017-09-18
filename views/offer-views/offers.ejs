@@ -1,167 +1,211 @@
-<h2>My Offers</h2>
+<%=console.log(listOfOffers[0])%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
 
-<h2>New Offer</h2>
+      <h2 class="text-center">Add / Edit Ride</h2>
 
+      <div id="directionMap"></div>
+      <div id="google-map-inputs">
+        <input class="form-control gmaps-inner-input" id="gmaps-origin-input" type="text" placeholder="Origin City">
+        <input class="form-control gmaps-inner-input" id="gmaps-destination-input" type="text" placeholder="Destination City">
+      </div>
 
+      <div id="route-info-pane">
 
+        <div id="route-distance-container">
+          <i class="fa fa-road" aria-hidden="true"></i>
+          <span id="route-distance"></span>
+        </div>
+        <div id="route-duration-container">
+          <i class="fa fa-hourglass" aria-hidden="true"></i>
+          <span id="route-duration"></span>
+        </div>
 
+        <input type="hidden" name="" value="" id="route-distance-value">
 
-
-<div id="directionMap"></div>
-<div id="google-map-inputs">
-  <input class="form-control gmaps-inner-input" id="gmaps-origin-input" type="text" placeholder="Origin City">
-  <input class="form-control gmaps-inner-input" id="gmaps-destination-input" type="text" placeholder="Destination City">
-</div>
-
-<div id="route-info-pane">
-
-  <div id="route-distance-container">
-    <i class="fa fa-hourglass" aria-hidden="true"></i>
-    <span id="route-distance"></span>
-  </div>
-  <div id="route-duration-container">
-    <i class="fa fa-road" aria-hidden="true"></i>
-    <span id="route-duration"></span>
-  </div>
-
-  <input type="hidden" name="" value="" id="route-distance-value">
-
-  <div id="slidecontainer">
-    <label for="mpg-slider">Vehicle MPG</label>
-    <span>10</span>
-    <input type="range" min="10" max="50" step="1" id="mpg-slider" list="tickmarks">
-    <span>50</span>
-    <datalist id="tickmarks">
+        <div id="slidecontainer">
+          <label for="mpg-slider">Vehicle MPG</label>
+          <span>10</span>
+          <input type="range" min="10" max="50" step="1" id="mpg-slider" list="tickmarks">
+          <span>50</span>
+          <datalist id="tickmarks">
       <option value="10">
       <option value="20">
       <option value="30">
       <option value="40">
       <option value="50">
     </datalist>
-    <h6><span id="slider-mpg-value"></span> MPG</h6>
-    <h6><span id="gallons-required"></span> gallons required</h6>
+          <h6><span id="slider-mpg-value"></span> MPG</h6>
+          <h6><span id="gallons-required"></span> gallons required</h6>
 
-    </span>
-  </div>
+          </span>
+        </div>
 
-</div>
+      </div>
 
-<form
-    <%if(listOfOffers.length >0){ %>
-      class="styled-form edit-form"
-      action="/offers/<%=listOfOffers[0].id%>"
-    <%}else{%>
-      class="styled-form"
-      action="/offers"
-      <%}%>
-    method="post">
-  <div class="row no-max-width hidden">
-    <div class="form-group col-md-6 map-group pull-left">
-      <label for="origin">Origin City</label>
-      <input class="form-control" id="origin-input" type="hidden" name="originCity">
-      <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
-      <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
-    </div>
-    <div class="form-group col-md-6 map-group pull-right">
-      <label for="destination">Destination City</label>
-      <input class="form-control" id="destination-input" type="hidden" name="destinationCity">
-      <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
-      <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="car-type">Car Type</label>
-    <select class="form-control" id="car-type" name="carType">
-                <option value="mini">Mini</option>
-                <option value="sedan" selected>Sedan</option>
-                <option value="suv">SUV or Van</option>
-                <option value="truck">Truck</option>
+
+
+      <form id="ride-form" <%if(listOfOffers.length> 0){ %> class="styled-form edit-form" action="/offers/
+        <%=listOfOffers[0].id%>"
+          <%}else{%>
+            class="styled-form" action="/offers"
+            <%}%>
+              method="post">
+              <div class="row no-max-width hidden">
+                <div class="form-group col-md-6 map-group pull-left">
+                  <label for="origin">Origin City</label>
+                  <input class="form-control" id="origin-input" type="hidden" name="originCity">
+                  <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
+                  <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
+                  <input id="origin-placeid" type="hidden" name="originPlaceId" value="">
+                </div>
+                <div class="form-group col-md-6 map-group pull-right">
+                  <label for="destination">Destination City</label>
+                  <input class="form-control" id="destination-input" type="hidden" name="destinationCity">
+                  <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
+                  <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+                  <input id="destination-placeid" type="hidden" name="destinationPlaceId" value="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="car-type">Car Type</label>
+                <select class="form-control" id="car-type" name="carType">
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].car === "mini"){%>
+                  selected
+                <%}%>
+                value="mini">Mini</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].car === "sedan"){%>
+                  selected
+                <%}%> value="sedan" >Sedan</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].car === "suv"){%>
+                  selected
+                <%}%> value="suv">SUV or Van</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].car === "truck"){%>
+                  selected
+                <%}%> value="truck">Truck</option>
               </select>
-  </div>
-  <div class="form-group">
-    <label for="spaces-available">Spaces Available</label>
-    <select class="form-control" id="spaces-available" name="spacesAvailable">
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6" >6</option>
+              </div>
+              <div class="form-group">
+                <label for="spaces-available">Spaces Available</label>
+                <select class="form-control" id="spaces-available" name="spacesAvailable">
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "1"){%>
+                  selected
+                <%}%> value="1">1</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "2"){%>
+                  selected
+                <%}%>  value="2">2</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "3"){%>
+                  selected
+                <%}%>  value="3">3</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "4"){%>
+                  selected
+                <%}%>  value="4">4</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "5"){%>
+                  selected
+                <%}%>  value="5">5</option>
+                <option
+                <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === "6"){%>
+                  selected
+                <%}%>  value="6" >6</option>
               </select>
-  </div>
-  <div class="form-group">
-    <label for="pets-accepted">Pets Accepted?</label>
-    <select class="form-control" id="pets-accepted" name="petsAccepted">
-      <option value="yes">Yes</option>
-      <option value="no" selected>No</option>
+              </div>
+              <div class="form-group">
+                <label for="pets-accepted">Pets Accepted?</label>
+                <select class="form-control" id="pets-accepted" name="petsAccepted">
+      <option
+      <%if(listOfOffers.length > 0 && listOfOffers[0].pets === true){%>
+        selected
+      <%}%> value="yes" >Yes</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].pets === false){%>
+        selected
+      <%}%> value="no" >No</option>
     </select>
-  </div>
-  <div class="form-group" data-provide="datepicker">
-    <label for="departure-date">Departure Date</label>
-    <input class="form-control" id="departure-date" type="date" name="departureDate" placeholder="" value="2017-11-01">
-  </div>
-  <div class="form-group">
-    <label for="departure-time">Departure Time</label>
-    <select class="form-control" id="departure-time" name="departureTime">
-      <option value="morning">Morning</option>
-      <option value="afternoon" selected>Afternoon</option>
-      <option value="evening">Evening</option>
-      <option value="night">Night Flight</option>
+              </div>
+              <div class="form-group" data-provide="datepicker">
+                <label for="departure-date">Departure Date</label>
+                <input class="form-control" id="departure-date" type="date" name="departureDate" placeholder="" value="
+            <%if(listOfOffers.length > 0){%>
+              listOfOffers[0].departureDate
+            <%} else {%>
+            2017-11-01
+            <%}%>
+            ">
+              </div>
+              <div class="form-group">
+                <label for="departure-time">Departure Time</label>
+                <select class="form-control" id="departure-time" name="departureTime">
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "morning"){%>
+        selected
+      <%}%> value="morning">Morning</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "afternoon"){%>
+        selected
+      <%}%> value="afternoon" selected>Afternoon</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "evening"){%>
+        selected
+      <%}%> value="evening">Evening</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "night"){%>
+        selected
+      <%}%> value="night">Night Flight</option>
     </select>
-  </div>
-  <div class="form-group">
-    <label for="barter-item">What would you like in exchange for this ride?</label>
-    <select class="form-control" id="barter-item" name="barterItem">
-      <option value="food">Food</option>
-      <option value="water" selected>Water</option>
-      <option value="gas">Gas</option>
-      <option value="humor">Good Humor</option>
+              </div>
+              <div class="form-group">
+                <label for="barter-item">What would you like in exchange for this ride?</label>
+                <select class="form-control" id="barter-item" name="barterItem">
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "food"){%>
+        selected
+      <%}%> value="food">Food</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "water"){%>
+        selected
+      <%}%> value="water" selected>Water</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "gas"){%>
+        selected
+      <%}%> value="gas">Gas</option>
+      <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "humor"){%>
+        selected
+      <%}%> value="humor">Good Humor</option>
     </select>
+              </div>
+
+              <%if(listOfOffers.length >0){ %>
+
+                <button class="btn btn-large btn-success">Edit</button>
+                <%}else{%>
+                  <button class="btn btn-large btn-success">Add</button>
+                  <%}%>
+
+      </form>
+    </div>
+
+    <div class="col-md-3">
+
+      <%if(listOfOffers.length >0){ %>
+        <h2 class="text-center">Current Ride</h2>
+        <%}%>
+          <ul>
+            <%listOfOffers.forEach((offer) => {%>
+              <li>
+                <h3><%=offer.origin%></h3> <span>to</span>
+                <h3><%=offer.destination%></h3>
+
+                <a id="edit-ride-button" href="/offers">Edit</a>
+                <a href="/offers/<%=offer._id%>/delete">Delete</a>
+              </li>
+
+              <%})%>
+          </ul>
+    </div>
   </div>
-
-  <%if(listOfOffers.length >0){ %>
-
-    <button class="btn btn-large btn-success">Edit</button>
-  <%}else{%>
-    <button class="btn btn-large btn-success">Add</button>
-    <%}%>
-
-</form>
-
-
-<ul>
-  <%listOfOffers.forEach((offer) => {%>
-    <li>
-      <h3><%=offer.origin%></h3> <span>to</span>
-      <h3><%=offer.destination%></h3>
-
-      <a href="/offers/<%=offer._id%>/edit">Edit</a>
-      <a href="/offers/<%=offer._id%>/delete">Delete</a>
-    </li>
-
-    <%})%>
-</ul>
-
-<%# <input id="origin-input" class="controls" type="text"
-        placeholder="Enter an origin location">
-
-    <input id="destination-input" class="controls" type="text"
-        placeholder="Enter a destination location">
-
-    <div id="mode-selector" class="controls">
-      <input type="radio" name="type" id="changemode-walking" checked="checked">
-      <label for="changemode-walking">Walking</label>
-
-      <input type="radio" name="type" id="changemode-transit">
-      <label for="changemode-transit">Transit</label>
-
-      <input type="radio" name="type" id="changemode-driving">
-      <label for="changemode-driving">Driving</label>
-    </div>%>
-
-
-
-
+  </div>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap">
   </script>
   <script>
@@ -266,6 +310,9 @@
         travelMode: this.travelMode
       }, function(response, status) {
         if (status === 'OK') {
+          console.log(response)
+
+
 
           // console.log(document.getElementById("origin-input").value);
           document.getElementById("origin-lat").value = response.routes["0"].legs["0"].start_location.lat();
@@ -274,6 +321,9 @@
           document.getElementById("destination-lng").value = response.routes["0"].legs["0"].end_location.lng();
           document.getElementById("origin-input").value = response.routes["0"].legs["0"].start_address;
           document.getElementById("destination-input").value = response.routes["0"].legs["0"].end_address;
+
+          document.getElementById("origin-placeid").value = response.request.destination.placeId;
+          document.getElementById("destination-placeid").value = response.request.origin.placeId;
 
           document.getElementById("route-distance").innerHTML = response.routes["0"].legs["0"].distance.text;
           document.getElementById("route-distance-value").value = response.routes["0"].legs["0"].distance.value;
@@ -287,6 +337,7 @@
     };
   </script>
   <script>
+    //slider on-the-fly updating
     var listener = function() {
       window.requestAnimationFrame(function() {
         document.getElementById("slider-mpg-value").innerHTML = document.getElementById("mpg-slider").value;
@@ -305,4 +356,13 @@
     sliderMpg.addEventListener("mouseup", function() {
       sliderMpg.removeEventListener("mousemove", listener);
     });
+  </script>
+  <script>
+    //click listener to show form on Edit click
+    // const rideForm = document.getElementById("ride-form");
+    // const editRideBtn = document.getElementById("edit-ride-button");
+    // editRideBtn.onclick = function() {
+    //   rideForm.style.display = "block";
+    //   rideForm.classList.remove("hidden");
+    // };
   </script>

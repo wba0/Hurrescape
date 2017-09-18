@@ -26,10 +26,13 @@
 
 
         <div class="col-md-6">
-          <div id="windy-container"></div>
+          <div id="windy-container">
+            <h3 class="text-center">Wind Map</h3>
+          </div>
 
         </div>
         <div class="col-md-4">
+          <h3 class="text-center">Storm Tracking</h3>
         <div id="tracking-container"></div>
       </div>
       </div>
@@ -116,24 +119,14 @@
             <span class="col-md-1">to</span>
             <div class="col-md-4">
 
-
               <%listOfOffers.forEach((offer) => {%>
-
 
                 <div class="card destination-card" data-destination="<%=offer.destination%>">
                   <h5><%=offer.destination%></h5>
                 </div>
 
-
                 <%})%>
             </div>
-
-
-
-
-
-
-
 
           </div>
 
@@ -205,23 +198,26 @@
               });
 
 
-              autocomplete.addListener('place_changed', function() {
+              autocomplete.addListener('place_changed', function()
+              {
 
+
+
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
 
                 //working on this ----------------------------------------------
-                var searchedOrigin = input.value;
+                var searchedOrigin = place.formatted_address;
+
+                console.log(place);
 
                 if ($(".origin-card").attr("data-origin") === searchedOrigin) {
-                  console.log(searchedOrigin);
                   $('.origin-card[data-origin="' + searchedOrigin + '"]').show();
                   // $('.origin-card[data-origin=`${searchedOrigin}`]').show();
                 }
 
                 //-----------------------------------------------------------------
-
-                infowindow.close();
-                marker.setVisible(false);
-                var place = autocomplete.getPlace();
 
                 document.getElementById("origin-lat").value = place.geometry.location.lat();
                 document.getElementById("origin-lng").value = place.geometry.location.lng();
