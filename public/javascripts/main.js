@@ -35,7 +35,7 @@ $(document).ready(function($) {
         $("#storm-list").append(
           `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
           <h5 class="storm-name">${hName}</h5>
-          <ul class="storm-stats no-bullets">
+          <ul class="storm-stats">
           <li>
             <span>Category: ${hCat}</span>
           </li>
