@@ -131,4 +131,17 @@ router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 //   );
 // });
 //
+
+router.post("/offers/:id/delete", (req, res, next) => {
+  OfferModel.findByIdAndRemove(
+    req.params.id,
+    (err, foundProduct) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.redirect("/offers");
+    });
+  });
+
 module.exports = router;
