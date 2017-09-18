@@ -4,7 +4,6 @@ const OfferModel = require('../models/offer-model.js');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  console.log(req.user);
     OfferModel.find(
     {},
     (err, offersFromDb) => {
@@ -15,7 +14,7 @@ router.get('/', (req, res, next) => {
       res.locals.listOfOffers = offersFromDb;
       //i want a feedback message here
       //
-      // req.locals.applicationFeedback = req.flash("applySuccess");
+      res.locals.applySuccessView = req.flash("applySuccess");
       if (req.user) {
         res.locals.securityFeedback = req.flash("securityError");
         res.locals.signupFeedback = req.flash("signupSuccess");

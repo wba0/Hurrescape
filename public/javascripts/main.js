@@ -10,7 +10,6 @@ $(document).ready(function($) {
     url: "http://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
     dataType: "jsonp",
     success: function(parsed_json) {
-      console.log(parsed_json);
       $("#wu-map").html(parsed_json.currenthurricane["0"].stormInfo.wuiurl);
       $("#wu-map-img").attr("src", `http://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
 
@@ -26,14 +25,14 @@ $(document).ready(function($) {
 
         const mapUrl = `http://icons.wunderground.com/data/images/${hNumber}_5day.gif`;
         if (hCat >= 1) {
-          $("#windy-container").append(`<iframe class="windy-iframe windy-${hNumber}" width="900" height="600"
+          $("#windy-container").append(`<iframe class="windy-iframe windy-${hNumber}" width="640" height="480"
           src="https://embed.windy.com/embed2.html?lat=${hLat}&lon=${hLng}&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=coordinates&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
           </iframe>`);
         }
 
         $("#storm-list").append(
           `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
-          <h5 class="storm-name">${hName}</h5>
+          <h5 class="storm-name" class="text-center">${hName}</h5>
           <ul class="storm-stats">
           <li>
             <span>Category: ${hCat}</span>

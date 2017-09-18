@@ -5,22 +5,15 @@
 
   <%}%>
 
+<%if(applySuccessView.length > 0){%>
+  <p class="success-message">
+    <%=applySuccessView%>
+  </p>
+<%}%>
 
     <h6>Dedicated to Irma</h6>
 
 
-
-
-
-
-    <%# applySuccess logic%>
-
-
-
-
-
-
-      <h3>Wind Map for your vicinity</h3>
 
 
 
@@ -29,9 +22,9 @@
 </iframe>%>
 
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2" class="index-left-panel">
             <ul class="list-group" id="storm-list">
-              <h3>Current Storm Information</h3>
+              <h5 class="text-center">Current Storm Information</h5>
 
             </ul>
 
@@ -40,12 +33,12 @@
 
           <div class="col-md-6">
             <div id="windy-container">
-              <h3 class="text-center">Wind Map</h3>
+              <h3 class="text-center index-h3">Wind Map</h3>
             </div>
 
           </div>
           <div class="col-md-4">
-            <h3 class="text-center">Storm Tracking</h3>
+            <h3 class="text-center index-h3">Storm Tracking</h3>
             <div id="tracking-container"></div>
           </div>
         </div>
@@ -88,7 +81,8 @@
                 <%listOfOffers.forEach((offer) => {%>
                   <div class="col-md-6">
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
-                      <h4 class="card-header"><%=offer.origin%> to <%=offer.destination%></h4>
+                      <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+ <%=offer.destination%></h4>
                       <br>
                       <h5 class="text-center"> with: <%=offer.owner.email%></h5>
                       <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap" onerror="this.src='images/default.png'">
@@ -128,9 +122,9 @@
 
                       </div>
                       <div class="apply-section text-center">
-                        <form method="post" action="/offers/:id/apply" class="styled-form">
+                        <form method="post" action="/offers/<%=offer._id%>/apply" class="styled-form">
                           <label for="phone-number-input">Enter phone number to apply</label>
-                          <input id="phone-number-input" type="tel" name="phoneNumber" placeholder="(555)555-5555">
+                          <input id="phone-number-input" type="tel" name="phoneNumber" placeholder=" (555)555-5555" onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);">
                           <button class="btn btn-primary">Apply</button>
                         </form>
                       </div>

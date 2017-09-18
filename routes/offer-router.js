@@ -118,7 +118,8 @@ router.get("/offers/:id/delete", ensureLogin.ensureLoggedIn("/"), (req, res, nex
   });
 
 
-router.post("/offers/:id/apply", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+router.post("/offers/:id/apply", (req, res, next) => {
+  console.log("req body", req.body);
       OfferModel.findById(
       req.params.id,
       (err, offerFromDb) => {

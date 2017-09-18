@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url( 'https://fonts.googleapis.com/css?family=Roboto');
 
 body {
   padding: 50px;
@@ -12,15 +11,27 @@ a {
 
 h1,
 h2,
-h3{
+h3 {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.index-h3{
+  padding: 10px 20px;
+    background: #eee;
+    max-width: 240px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
 
-.styled-form{
+.index-left-panel{
+  margin-top: 60px;
+}
+.styled-form {
   max-width: 600px;
   margin: 0 auto;
-  button{
+
+  button {
     display: block;
     margin: 0 auto;
   }
@@ -35,7 +46,7 @@ h3{
   width: 100%;
 }
 
-.success-message{
+.success-message {
   background: #009245;
   box-sizing: border-box;
   color: #fff;
@@ -44,139 +55,135 @@ h3{
   width: 100%;
 }
 
-.passport-button{
-  max-width: 191px
+.passport-button {
+  max-width: 191px;
 }
 
-.no-max-width{
+.no-max-width {
   max-width: 1920px;
   margin-bottom: 100px;
 }
 
-.map-group{
+.map-group {
   height: 300px;
-  label{
+
+  label {
     text-align: center;
   }
 }
-.card-deck .card.origin-card,
-.card-deck .card.destination-card{
+
+.card-deck .card.destination-card,
+.card-deck .card.origin-card {
   display: none;
 }
 
-.card-row{
+.card-row {
   // margin: 0 10%;
 }
-.form-signin{
+
+.form-signin {
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  h2{
+
+  h2 {
     margin-bottom: 30px;
   }
-  button{
+
+  button {
     margin-bottom: 30px;
   }
 }
 
-.alt-signins{
+.alt-signins {
   margin: 0 auto;
   width: 400px;
-
 }
 
-.navbar-email{
+.navbar-email {
   display: inline-block;
 }
 
-.navbar-avatar{
+.navbar-avatar {
   width: 50px;
   border-radius: 50px;
 }
 
-.offer-avatar{
+.offer-avatar {
   width: 120px;
   border-radius: 100px;
   padding: 10px;
 }
 
-.ride-card{
+.ride-card {
   font-size: 1.2em;
 }
 
-#storm-list{
-  .storm-name{
+#storm-list {
+  background-color: #eee;
+  ul{
+    padding-left: 20px;
+  }
+  li{
+    background-color: #eee;
+    padding: 3px;
+  }
+  h5{
+    padding: 3px;
+  }
 
-background-color: #ddd;
-padding: 10px;
+  .storm-name {
+    padding: 10px;
+    background-color: #ccc;
+  }
+  border-radius: 5px;
+  list-style: none;
 }
-border-radius: 5px;
-list-style: none;
 
-}
-
-.storm-name{
+.storm-name {
   cursor: pointer;
-
 }
 
-.storm-img{
+.storm-img {
   display: none;
-
 }
 
-.storm-stats{
+.storm-stats {
   list-style: disc;
 }
-.cat-1 h5{
+
+.cat-1 h5 {
   color: #FFFF00;
+}
 
+.cat-2 h5 {
+  color: #FFAE00;
 }
-.cat-2 h5{
-color: #FFAE00;
+
+.cat-3 h5 {
+  color: #FF0000;
 }
-.cat-3 h5{
-color: #FF0000;
+
+.cat-4 h5 {
+  color: #FF00FF;
 }
-.cat-4 h5{
-color: #FF00FF;
+
+.cat-5 h5 {
+  color: #FFC2FF;
 }
-.cat-5 h5{
-color: #FFC2FF;
-}
-.cat-0,
+
 .cat--1,
-.cat--2{
-display: none;
-}
-
-.windy-iframe{
+.cat--2,
+.cat-0 {
   display: none;
 }
 
+.windy-iframe {
+  display: none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#route-duration-container,
-#route-distance-container{
+#route-distance-container,
+#route-duration-container {
   display: inline-block;
   font-size: 2em;
   text-align: center;
@@ -185,45 +192,43 @@ display: none;
   margin-bottom: 10px;
 }
 
-#route-info-pane{
+#route-info-pane {
   margin: 0 auto;
   width: 600px;
-  div{
 
+  div {
     padding-bottom: 10px;
   }
 }
 
-#slidecontainer{
+#slidecontainer {
   width: 600px;
   text-align: center;
-
 }
 
-
-#google-map-inputs{
+#google-map-inputs {
   margin: 0 auto;
   width: 600px;
   text-align: center;
 }
-.gmaps-inner-input{
 
-}
+.gmaps-inner-input {}
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.fa{
+.fa {
   padding-right: 5px;
 }
 
-.apply-section{
-  form{
+.apply-section {
+  form {
     margin: 0 auto;
     padding: 20px 0;
     border-top: 1px solid #eee;
-    button{
+
+    button {
       margin-top: 15px;
     }
   }
