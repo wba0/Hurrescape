@@ -1,6 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -95,4 +98,51 @@ a {
   i{
     padding-right: 10px;
   }
+}
+
+#storm-list{
+  .storm-name{
+
+background-color: #ddd;
+padding: 10px;
+}
+border-radius: 5px;
+list-style: none;
+
+}
+
+.storm-name{
+  cursor: pointer;
+
+}
+
+.storm-img{
+  display: none;
+
+}
+
+.cat-1 h5{
+  color: #FFFF00;
+
+}
+.cat-2 h5{
+color: #FFAE00;
+}
+.cat-3 h5{
+color: #FF0000;
+}
+.cat-4 h5{
+color: #FF00FF;
+}
+.cat-5 h5{
+color: #FFC2FF;
+}
+.cat-0,
+.cat--1,
+.cat--2{
+display: none;
+}
+
+.windy-iframe{
+  display: none;
 }
