@@ -2,6 +2,9 @@
 $base: #00B7FF;
 $alt: #eee;
 
+.navbar-light .navbar-nav .active>.nav-link{
+  color: $base;
+}
 
 body {
   padding: 50px;
@@ -147,14 +150,11 @@ h3 {
 
   .storm-name {
     padding: 10px;
-    background-color: #ccc;
+    background-color: #bbb;
+    cursor: pointer;
   }
   border-radius: 5px;
   list-style: none;
-}
-
-.storm-name {
-  cursor: pointer;
 }
 
 .storm-img {
@@ -301,4 +301,28 @@ footer {
 
 nav {
   margin-bottom: 50px;
+}
+
+// .stroke {
+//   /* WebKit (Safari/Chrome) Only */
+//   -webkit-text-stroke: 1px white;
+//
+//   /* If we weren't using text-shadow, we'd set a fallback color
+//      and use this to set color instead
+//     -webkit-text-fill-color: white; */
+//
+//   color: black;
+//
+//   text-shadow:
+//     1px 1px 0 #000,
+//     /* Simulated effect for Firefox and Opera
+//        and nice enhancement for WebKit */
+//    -1px -1px 0 #000,
+//     1px -1px 0 #000,
+//    -1px  1px 0 #000,
+//     1px  1px 0 #000;
+// }
+
+.selected-storm{
+  background-color: #000 !important;
 }

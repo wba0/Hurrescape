@@ -38,7 +38,7 @@ $(document).ready(function($) {
 
         $("#storm-list").append(
           `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
-          <h5 class="storm-name" class="text-center">${hName}</h5>
+          <h5 class="storm-name text-center stroke">${hName}</h5>
           <ul class="storm-stats">
           <li>
             <span>Category: ${hCat}</span>
@@ -59,6 +59,12 @@ $(document).ready(function($) {
           `<img class="storm-img storm-img-${hNumber}" src="${mapUrl}">`
         );
 
+        //styling on selected storm
+        $(`.storm-number-${hNumber}`).on("click", () =>{
+          $(`.storm-name`).removeClass("selected-storm");
+          $(`#storm-list .storm-number-${hNumber} .storm-name`).addClass("selected-storm");
+        });
+
 
         //show windy storm window when corresponding storm name is clicked
         $(`.storm-number-${hNumber}`).on("click", function() {
@@ -75,6 +81,7 @@ $(document).ready(function($) {
       }); //end forEach hurricane
 
       //show something (first storm from wu json response) on page load
+      $(`#storm-list .storm-number-${firstStorm} .storm-name`).addClass("selected-storm");
       $(`.windy-${firstStorm}`).show();
       $(`.storm-img-${firstStorm}`).show();
 

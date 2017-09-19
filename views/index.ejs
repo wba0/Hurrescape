@@ -139,28 +139,236 @@
             function initMap() {
               var originMap = new google.maps.Map(document.getElementById('originMap'), {
                 center: {
-                  lat: -25.7616798,
-                  lng: -80.19179020000001
+                  lat: 25.765386,
+                  lng: -80.195815
                   },
-                zoom: 14,
+                zoom: 8,
                 zoomControl: false,
                 mapTypeControl: false,
                 streetViewControl: false,
                 rotateControl: false,
-                fullscreenControl: false
+                fullscreenControl: false,
+                styles: [
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "hue": "#F1FF00"
+            },
+            {
+                "saturation": -27.4
+            },
+            {
+                "lightness": 9.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "hue": "#0099FF"
+            },
+            {
+                "saturation": -20
+            },
+            {
+                "lightness": 36.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#00FF4F"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#FFB300"
+            },
+            {
+                "saturation": -38
+            },
+            {
+                "lightness": 11.2
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#00B6FF"
+            },
+            {
+                "saturation": 4.2
+            },
+            {
+                "lightness": -63.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#9FFF00"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    }
+]
               });
 
               var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
                 center: {
-                  lat: -8.5383218,
-                  lng: -81.37924129999999
+                  lat: 33.749711,
+                  lng: -84.388333
                 },
-                zoom: 14,
+                  zoom: 8,
                 zoomControl: false,
                 mapTypeControl: false,
                 streetViewControl: false,
                 rotateControl: false,
-                fullscreenControl: false
+                fullscreenControl: false,
+                styles: [
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "hue": "#F1FF00"
+            },
+            {
+                "saturation": -27.4
+            },
+            {
+                "lightness": 9.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "hue": "#0099FF"
+            },
+            {
+                "saturation": -20
+            },
+            {
+                "lightness": 36.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#00FF4F"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#FFB300"
+            },
+            {
+                "saturation": -38
+            },
+            {
+                "lightness": 11.2
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#00B6FF"
+            },
+            {
+                "saturation": 4.2
+            },
+            {
+                "lightness": -63.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#9FFF00"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    }
+]
               });
 
               var card = document.getElementById('pac-card');
