@@ -7,7 +7,7 @@
 $(document).ready(function($) {
 
   $(".card.ride-card").hide();
-    
+
 
   const windyUrl = $("#windy-iframe").attr("src");
 
@@ -15,7 +15,8 @@ $(document).ready(function($) {
     url: "http://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
     dataType: "jsonp",
     success: function(parsed_json) {
-      $("#wu-map").html(parsed_json.currenthurricane["0"].stormInfo.wuiurl);
+      console.log(parsed_json);
+      const firstStorm = parsed_json.currenthurricane[0].stormInfo.stormNumber;
       $("#wu-map-img").attr("src", `http://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
 
       parsed_json.currenthurricane.forEach((hurricane) => {
@@ -59,12 +60,13 @@ $(document).ready(function($) {
         );
 
 
-
+        //show windy storm window when corresponding storm name is clicked
         $(`.storm-number-${hNumber}`).on("click", function() {
           $(".windy-iframe").hide();
           $(`.windy-${hNumber}`).toggle();
         });
 
+        //show wu storm tracking when corresponding storm name is clicked
         $(`.storm-number-${hNumber}`).on("click", function() {
           $(".storm-img").css("display", "none");
           $(`.storm-img-${hNumber}`).css("display", "block");
@@ -72,11 +74,9 @@ $(document).ready(function($) {
 
       }); //end forEach hurricane
 
-
-      $(".storm-name").hover(function() {
-        console.log($(this).children("img"));
-        $(this).siblings("img").toggle();
-      });
+      //show something (first storm from wu json response) on page load
+      $(`.windy-${firstStorm}`).show();
+      $(`.storm-img-${firstStorm}`).show();
 
 
       function reload() {
