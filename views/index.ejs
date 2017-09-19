@@ -79,10 +79,10 @@
             <div class="row card-row">
               <div class="card-deck">
                 <%listOfOffers.forEach((offer) => {%>
-                  <div class="col-md-6">
+                  <div class="col-md-6 ">
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
                       <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
- <%=offer.destination%></h4>
+                        <%=offer.destination%></h4>
                       <br>
                       <h5 class="text-center"> with: <%=offer.owner.email%></h5>
                       <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap" onerror="this.src='images/default.png'">
@@ -138,8 +138,11 @@
             </div>
           </div>
 
+          <div class="filler-div"></div>
+
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
           <script>
+
             // This example requires the Places library. Include the libraries=places
             // parameter when you first load the API. For example:
             // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -207,7 +210,7 @@
 
 
               autocomplete.addListener('place_changed', function() {
-
+                $(".card.ride-card").hide();
 
 
                 infowindow.close();
@@ -217,11 +220,12 @@
                 //working on this ----------------------------------------------
                 var searchedOrigin = place.formatted_address;
 
-                console.log(place);
+                console.log(searchedOrigin);
+                console.log($(".ride-card").attr("data-origin"));
 
-                if ($(".ride-card").attr("data-origin") === searchedOrigin || $(".ride-card").attr("data-destination") === searchedDestination) {
-                  $('.ride-card[data-origin="' + searchedOrigin + '"]').show();
-                  $('.ride-card[data-destination="' + searchedDestination + '"]').show();
+                if ($(".ride-card").attr("data-origin") === searchedOrigin  ) {
+                  const matchedCard = $('.ride-card[data-origin="' + searchedOrigin + '"]');
+                  matchedCard.show();
                   // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
                 }
 
@@ -260,21 +264,20 @@
               });
 
               autocompleteD.addListener('place_changed', function() {
-
-                //working on this ----------------------------------------------
-                var searchedDestination = inputD.value;
-
-                if ($(".destination-card").attr("data-destination") === searchedDestination) {
-                  console.log(searchedDestination);
-                  $('.destination-card[data-destination="' + searchedDestination + '"]').show();
-                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
-                }
-
-                //-----------------------------------------------------------------
+                $(".card.ride-card").hide();
 
                 infowindowD.close();
                 markerD.setVisible(false);
                 var placeD = autocompleteD.getPlace();
+                var searchedDestination = placeD.formatted_address;
+
+
+                if ($(".ride-card").attr("data-destination") === searchedDestination) {
+                  const matchedCard = $('.ride-card[data-destination="' + searchedDestination + '"]');
+                  matchedCard.show();
+                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
+                }
+
                 document.getElementById("destination-lat").value = placeD.geometry.location.lat();
                 document.getElementById("destination-lng").value = placeD.geometry.location.lng();
                 if (!placeD.geometry) {
@@ -303,6 +306,8 @@
                 }
 
               });
+
+
 
             }
           </script>

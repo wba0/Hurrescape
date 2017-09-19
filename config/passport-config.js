@@ -72,42 +72,42 @@ passport.use(
 );
 
 const FbStrategy = require('passport-facebook').Strategy;
-// passport.use(
-//   new FbStrategy({
-//       clientID: process.env.fb_app_id,
-//       clientSecret: process.env.fb_app_secret,
-//       callbackURL: "/auth/facebook/callback"
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       console.log("Facebook user info: ", profile);
-//       UserModel.findOne({
-//           facebookID: profile.id
-//         },
-//         (err, userFromDb) => {
-//           if (err) {
-//             done(err);
-//             return;
-//           }
-//           if (userFromDb) {
-//             done(null, userFromDb);
-//             return;
-//           }
-//           const theUser = new UserModel({
-//             facebookID: profile.id,
-//             email: profile.displayName,
-//           });
-//           theUser.save((err) => {
-//             if(err){
-//               done(err);
-//               return;
-//             }
-//             done(null, theUser);
-//           });
-//         }
-//       );
-//     }
-//   )
-// );
+passport.use(
+  new FbStrategy({
+      clientID: process.env.fb_app_id,
+      clientSecret: process.env.fb_app_secret,
+      callbackURL: "/auth/facebook/callback"
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log("Facebook user info: ", profile);
+      UserModel.findOne({
+          facebookID: profile.id
+        },
+        (err, userFromDb) => {
+          if (err) {
+            done(err);
+            return;
+          }
+          if (userFromDb) {
+            done(null, userFromDb);
+            return;
+          }
+          const theUser = new UserModel({
+            facebookID: profile.id,
+            email: profile.displayName,
+          });
+          theUser.save((err) => {
+            if(err){
+              done(err);
+              return;
+            }
+            done(null, theUser);
+          });
+        }
+      );
+    }
+  )
+);
 
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 

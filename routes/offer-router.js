@@ -5,26 +5,27 @@ const multer = require('multer');
 const ensureLogin = require('connect-ensure-login');
 
 
-const myUploader = multer(
-  {
-    dest: __dirname + "/../public/uploads"
-  }
-);
+const myUploader = multer({
+  dest: __dirname + "/../public/uploads"
+});
 router.get("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
-  OfferModel.find(
-    {owner: req.user._id},
-      (err, offersFromDb) => {
-        if(err){
-          next(err);
-          return;
-        }
-        // res.locals.securityFeedback = securityError;
-        // res.locals.updateFeedback = req.flash("updateSuccess");
-        res.locals.listOfOffers = offersFromDb;
-        res.render("offer-views/offers.ejs");
-
-
+  OfferModel.find({
+      owner: req.user._id
+    },
+    (err, offersFromDb) => {
+      if (err) {
+        next(err);
+        return;
       }
+      // res.locals.securityFeedback = securityError;
+      // res.locals.updateFeedback = req.flash("updateSuccess");
+      res.locals.listOfOffers = offersFromDb;
+      res.render("offer-views/offers.ejs");
+
+      res.locals.applicationDeleteSuccessMsg = req.flash("applicationDeleteSuccess");
+
+
+    }
   );
 
 });
@@ -33,31 +34,31 @@ router.get("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 router.post("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 
   const theOffer = new OfferModel({
-      origin: req.body.originCity,
-      originLatLng: req.body.originCityLatLng,
-      destination: req.body.destinationCity,
-      destinationLatLng: req.body.destinationCityLatLng,
-      originPlaceId: req.body.originPlaceId,
-      destinationPlaceId: req.body.destinationPlaceId,
-      car: req.body.carType,
-      spaces: req.body.spacesAvailable,
-      pets: req.body.petsAccepted,
-      departureDate: req.body.departureDate,
-      departureTime: req.body.departureTime,
-      barter: req.body.barterItem,
-      owner: req.user._id, //logged in user's ID from passport
-    });
-    theOffer.save((err) => {
-      console.log(req.body)
-      console.log("origin city---> ", req.body.originCity)
-      if(err){
-        console.log(err);
-        next(err);
-        return;
-      }
-      req.flash("offerFeedback", "Offer added.");
-      res.redirect("/offers");
-    });
+    origin: req.body.originCity,
+    originLatLng: req.body.originCityLatLng,
+    destination: req.body.destinationCity,
+    destinationLatLng: req.body.destinationCityLatLng,
+    originPlaceId: req.body.originPlaceId,
+    destinationPlaceId: req.body.destinationPlaceId,
+    car: req.body.carType,
+    spaces: req.body.spacesAvailable,
+    pets: req.body.petsAccepted,
+    departureDate: req.body.departureDate,
+    departureTime: req.body.departureTime,
+    barter: req.body.barterItem,
+    owner: req.user._id, //logged in user's ID from passport
+  });
+  theOffer.save((err) => {
+    console.log(req.body)
+    console.log("origin city---> ", req.body.originCity)
+    if (err) {
+      console.log(err);
+      next(err);
+      return;
+    }
+    req.flash("offerFeedback", "Offer added.");
+    res.redirect("/offers");
+  });
 
 });
 
@@ -67,11 +68,11 @@ router.post("/offers/:id", ensureLogin.ensureLoggedIn("/"), (req, res, next) => 
   OfferModel.findById(
     req.params.id,
     (err, offerFromDb) => {
-      if(err){
+      if (err) {
         next(err);
         return;
       }
-      if(offerFromDb.owner.toString() !== req.user._id.toString()){
+      if (offerFromDb.owner.toString() !== req.user._id.toString()) {
         req.flash("securityError", "You can only edit your own rides.");
         res.redirect("/offers");
         return;
@@ -92,7 +93,7 @@ router.post("/offers/:id", ensureLogin.ensureLoggedIn("/"), (req, res, next) => 
       offerFromDb.owner = req.user._id; //logged in user's ID from passport
 
       offerFromDb.save((err) => {
-        if(err){
+        if (err) {
           next(err);
           return;
         }
@@ -115,30 +116,52 @@ router.get("/offers/:id/delete", ensureLogin.ensureLoggedIn("/"), (req, res, nex
       }
       res.redirect("/offers");
     });
-  });
+});
 
 
 router.post("/offers/:id/apply", (req, res, next) => {
   console.log("req body", req.body);
-      OfferModel.findById(
-      req.params.id,
-      (err, offerFromDb) => {
-        if(err){
+  OfferModel.findById(
+    req.params.id,
+    (err, offerFromDb) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      offerFromDb.appliedUsers.push(req.body.phoneNumber);
+      offerFromDb.save((err) => {
+        if (err) {
           next(err);
           return;
         }
-        offerFromDb.appliedUsers.push(req.body.phoneNumber);
-        offerFromDb.save((err) => {
-          if(err){
-            next(err);
-            return;
-          }
-          req.flash("applySuccess", "Application succesful. Wait for reply from owner.")
-          res.redirect("/");
-        });
-      }
-    );
+        req.flash("applySuccess", "Application succesful. Wait for reply from owner.")
+        res.redirect("/");
+      });
+    }
+  );
 
-  });
+});
+
+router.post("/offers/:offerId/applications/:applicationIndex/delete", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+  OfferModel.findById(
+    req.params.offerId,
+    (err, offerFromDb) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      offerFromDb.appliedUsers.splice(applicationIndex, 1);
+      offerFromDb.save((err) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        req.flash("applicationDeleteSuccess", "Application removed.");
+        res.redirect("/offers");
+      });
+    }
+  );
+});
+
 
 module.exports = router;
