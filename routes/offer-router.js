@@ -142,16 +142,16 @@ router.post("/offers/:id/apply", (req, res, next) => {
 
 });
 
-router.post("/offers/:offerId/applications/:applicationIndex/delete", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
+router.get("/offers/:offerId/applications/:applicationIndex/delete", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   OfferModel.findById(
     req.params.offerId,
-    (err, offerFromDb) => {
+    (err, appFromDb) => {
       if (err) {
         next(err);
         return;
       }
-      offerFromDb.appliedUsers.splice(applicationIndex, 1);
-      offerFromDb.save((err) => {
+      appFromDb.appliedUsers.splice(req.params.applicationIndex, 1);
+      appFromDb.save((err) => {
         if (err) {
           next(err);
           return;

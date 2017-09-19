@@ -73,13 +73,14 @@
             <div class="row card-row justify-content-md-center">
               <div class="card-deck">
                 <%listOfOffers.forEach((offer) => {%>
-                  <div class="col-md-6 ">
+                  <div class="col-md-4">
+                  <%=offer.owner%>
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
                       <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                         <%=offer.destination%></h4>
                       <br>
                       <h5 class="text-center"> with: <%=offer.owner.email%></h5>
-                      <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.ownerAvatar%>" alt="Card image cap" onerror="this.src='images/default.png'">
+                      <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.owner.avatarUrl%>" alt="Card image cap" onerror="this.src='images/default.png'">
                       <div class="departure-date-time text-center">
                         <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                         <%=offer.departureDate.toDateString()%><br>
@@ -125,27 +126,26 @@
                       <div class="card-footer">
                         <small class="text-muted">Created on <%=offer.createdAt.toDateString()%></small>
                       </div>
-                      <%})%>
                     </div>
                   </div>
+                  <%})%>
               </div>
             </div>
           </div>
 
-          <div class="filler-div"></div>
+          <%# <div class="filler-div"></div>%>
 
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
           <script>
-
             // This example requires the Places library. Include the libraries=places
             // parameter when you first load the API. For example:
             // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
             function initMap() {
               var originMap = new google.maps.Map(document.getElementById('originMap'), {
                 center: {
-                  lat: -33.8688,
-                  lng: 151.2195
-                },
+                  lat: -25.7616798,
+                  lng: -80.19179020000001
+                  },
                 zoom: 14,
                 zoomControl: false,
                 mapTypeControl: false,
@@ -156,8 +156,8 @@
 
               var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
                 center: {
-                  lat: -33.8688,
-                  lng: 151.2195
+                  lat: -8.5383218,
+                  lng: -81.37924129999999
                 },
                 zoom: 14,
                 zoomControl: false,

@@ -5,7 +5,12 @@
 
 
 $(document).ready(function($) {
+
+  $(".card.ride-card").hide();
+    
+
   const windyUrl = $("#windy-iframe").attr("src");
+
   $.ajax({
     url: "http://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
     dataType: "jsonp",

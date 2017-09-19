@@ -1,83 +1,83 @@
 <% /* %>
-<%if(applicationDeleteSuccessMsg.length > 0){%>
-  <p class="success-message">
-    <%=applicationDeleteSuccessMsg%>
-  </p>
+  <%if(applicationDeleteSuccessMsg.length > 0){%>
+    <p class="success-message">
+      <%=applicationDeleteSuccessMsg%>
+    </p>
 
-  <%}%>
-  <% */ %>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9">
+    <%}%>
+      <% */ %>
+          <div class="row">
+            <div class="col-md-9">
 
-        <h2 class="text-center">Add / Edit Ride</h2>
+              <h2 class="text-center">Add / Edit Ride</h2>
 
-        <div id="directionMap"></div>
-        <div id="google-map-inputs">
-          <input class="form-control gmaps-inner-input" id="gmaps-origin-input" type="text" placeholder="Origin City">
-          <input class="form-control gmaps-inner-input" id="gmaps-destination-input" type="text" placeholder="Destination City">
-        </div>
+              <div id="directionMap"></div>
+              <div id="google-map-inputs">
+                <input class="form-control gmaps-inner-input" id="gmaps-origin-input" type="text" placeholder="Origin City">
+                <input class="form-control gmaps-inner-input" id="gmaps-destination-input" type="text" placeholder="Destination City">
+              </div>
 
-        <div id="route-info-pane">
+              <div id="route-info-pane">
 
-          <div id="route-distance-container">
-            <i class="fa fa-road" aria-hidden="true"></i>
-            <span id="route-distance"></span>
-          </div>
-          <div id="route-duration-container">
-            <i class="fa fa-hourglass" aria-hidden="true"></i>
-            <span id="route-duration"></span>
-          </div>
+                <div id="route-distance-container">
+                  <i class="fa fa-road" aria-hidden="true"></i>
+                  <span id="route-distance"></span>
+                </div>
+                <div id="route-duration-container">
+                  <i class="fa fa-hourglass" aria-hidden="true"></i>
+                  <span id="route-duration"></span>
+                </div>
 
-          <input type="hidden" name="" value="" id="route-distance-value">
+                <input type="hidden" name="" value="" id="route-distance-value">
 
-          <div id="slidecontainer">
-            <label for="mpg-slider"></label>
-            <span>10</span>
-            <input type="range" min="10" max="50" step="1" id="mpg-slider" list="tickmarks" value="30">
-            <span>50</span>
-            <datalist id="tickmarks">
+                <div id="slidecontainer">
+                  <label for="mpg-slider"></label>
+                  <span>10</span>
+                  <input type="range" min="10" max="50" step="1" id="mpg-slider" list="tickmarks" value="30">
+                  <span>50</span>
+                  <datalist id="tickmarks">
       <option value="10">
       <option value="20">
       <option value="30">
       <option value="40">
       <option value="50">
     </datalist>
-            <h6><span id="slider-mpg-value">30</span> MPG</h6>
-            <h6><span id="gallons-required"></span> gallons required</h6>
+                  <h6><span id="slider-mpg-value">30</span> MPG</h6>
+                  <h6><span id="gallons-required"></span> gallons required</h6>
 
-            </span>
-          </div>
-
-        </div>
-
-
-
-        <form id="ride-form" <%if(listOfOffers.length> 0){ %> class="styled-form edit-form" action="/offers/
-          <%=listOfOffers[0].id%>"
-            <%}else{%>
-              class="styled-form" action="/offers"
-              <%}%>
-                method="post">
-                <div class="row no-max-width hidden">
-                  <div class="form-group col-md-6 map-group pull-left">
-                    <label for="origin">Origin City</label>
-                    <input class="form-control" id="origin-input" type="hidden" name="originCity">
-                    <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
-                    <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
-                    <input id="origin-placeid" type="hidden" name="originPlaceId" value="">
-                  </div>
-                  <div class="form-group col-md-6 map-group pull-right">
-                    <label for="destination">Destination City</label>
-                    <input class="form-control" id="destination-input" type="hidden" name="destinationCity">
-                    <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
-                    <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
-                    <input id="destination-placeid" type="hidden" name="destinationPlaceId" value="">
-                  </div>
+                  </span>
                 </div>
-                <div class="form-group">
-                  <label for="car-type">Car Type</label>
-                  <select class="form-control" id="car-type" name="carType">
+
+              </div>
+
+
+
+              <form id="ride-form"
+              <%if(listOfOffers.length> 0){%>
+                class="styled-form edit-form" action="/offers/<%=listOfOffers[0].id%>"
+                  <%}else{%>
+                    class="styled-form" action="/offers"
+                    <%}%>
+                      method="post">
+                      <div class="row no-max-width hidden">
+                        <div class="form-group col-md-6 map-group pull-left">
+                          <label for="origin">Origin City</label>
+                          <input class="form-control" id="origin-input" type="hidden" name="originCity">
+                          <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
+                          <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
+                          <input id="origin-placeid" type="hidden" name="originPlaceId" value="">
+                        </div>
+                        <div class="form-group col-md-6 map-group pull-right">
+                          <label for="destination">Destination City</label>
+                          <input class="form-control" id="destination-input" type="hidden" name="destinationCity">
+                          <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
+                          <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
+                          <input id="destination-placeid" type="hidden" name="destinationPlaceId" value="">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="car-type">Car Type</label>
+                        <select class="form-control" id="car-type" name="carType">
                 <option
                 <%if(listOfOffers.length > 0 && listOfOffers[0].car === "mini"){%>
                   selected
@@ -96,10 +96,10 @@
                   selected
                 <%}%> value="truck">Truck</option>
               </select>
-                </div>
-                <div class="form-group">
-                  <label for="spaces-available">Spaces Available</label>
-                  <select class="form-control" id="spaces-available" name="spacesAvailable">
+                      </div>
+                      <div class="form-group">
+                        <label for="spaces-available">Spaces Available</label>
+                        <select class="form-control" id="spaces-available" name="spacesAvailable">
                 <option
                 <%if(listOfOffers.length > 0 && listOfOffers[0].spaces === 1){%>
                   selected
@@ -125,10 +125,10 @@
                   selected
                 <%}%>  value="6" >6</option>
               </select>
-                </div>
-                <div class="form-group">
-                  <label for="pets-accepted">Pets Accepted?</label>
-                  <select class="form-control" id="pets-accepted" name="petsAccepted">
+                      </div>
+                      <div class="form-group">
+                        <label for="pets-accepted">Pets Accepted?</label>
+                        <select class="form-control" id="pets-accepted" name="petsAccepted">
       <option
       <%if(listOfOffers.length > 0 && listOfOffers[0].pets === true){%>
         selected
@@ -137,21 +137,21 @@
         selected
       <%}%> value="no" >No</option>
     </select>
-                </div>
-                <div class="form-group" data-provide="datepicker">
-                  <label for="departure-date">Departure Date</label>
-                  <input class="form-control" id="departure-date" type="date" name="departureDate" placeholder="" <%if(listOfOffers.length> 0){%>
-                  <%const formattedDate = listOfOffers[0].departureDate.toJSON().substr(0, 10)%>
-                    value="
-                    <%=formattedDate%>"
-                      <%} else {%>
-                        value="2017-11-01"
-                        <%}%>
-                          >
-                </div>
-                <div class="form-group">
-                  <label for="departure-time">Departure Time</label>
-                  <select class="form-control" id="departure-time" name="departureTime">
+                      </div>
+                      <div class="form-group" data-provide="datepicker">
+                        <label for="departure-date">Departure Date</label>
+                        <input class="form-control" id="departure-date" type="date" name="departureDate" placeholder="" <%if(listOfOffers.length> 0){%>
+                        <%const formattedDate = listOfOffers[0].departureDate.toJSON().substr(0, 10)%>
+                          value="
+                          <%=formattedDate%>"
+                            <%} else {%>
+                              value="2017-11-01"
+                              <%}%>
+                                >
+                      </div>
+                      <div class="form-group">
+                        <label for="departure-time">Departure Time</label>
+                        <select class="form-control" id="departure-time" name="departureTime">
       <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "morning"){%>
         selected
       <%}%> value="morning">Morning</option>
@@ -165,10 +165,10 @@
         selected
       <%}%> value="night">Night Flight</option>
     </select>
-                </div>
-                <div class="form-group">
-                  <label for="barter-item">What would you like in exchange for this ride?</label>
-                  <select class="form-control" id="barter-item" name="barterItem">
+                      </div>
+                      <div class="form-group">
+                        <label for="barter-item">What would you like in exchange for this ride?</label>
+                        <select class="form-control" id="barter-item" name="barterItem">
       <option <%if(listOfOffers.length > 0 && listOfOffers[0].departureTime === "food"){%>
         selected
       <%}%> value="food">Food</option>
@@ -182,259 +182,248 @@
         selected
       <%}%> value="humor">Good Humor</option>
     </select>
-                </div>
+                      </div>
 
-                <%if(listOfOffers.length >0){ %>
+                      <%if(listOfOffers.length >0){ %>
 
-                  <button class="btn btn-large btn-success">Edit</button>
-                  <%}else{%>
-                    <button class="btn btn-large btn-success">Add</button>
-                    <%}%>
-
-        </form>
-      </div>
-
-      <div class="col-md-3">
-
-        <div class="card-deck">
-          <%listOfOffers.forEach((offer) => {%>
-            <div class="card ride-card my-ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
-              <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                      <%=offer.destination%></h4>
-              <div class="departure-date-time text-center card-divider">
-                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                <%=offer.departureDate.toDateString()%><br>
-                  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                  <%=offer.departureTime%>
-              </div>
-              <div class="row ">
-                <div class="col-md-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i>
-                      <%=offer.car%>
-                    </li>
-                    <li class="list-group-item offer-info-line"><i class="fa fa-users" aria-hidden="true"></i>
-                      <%=offer.spaces%>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item offer-info-line"><i class="fa fa-paw" aria-hidden="true"></i>
-
-                      <%if(offer.pets === "true"){ %>
-                        <span>allowed!</span>
-                        <%} else {%>
-                          <span>no</span>
+                        <button class="btn btn-large btn-success">Edit</button>
+                        <%}else{%>
+                          <button class="btn btn-large btn-success">Add</button>
                           <%}%>
-                    </li>
-                    <li class="list-group-item offer-info-line"><i class="fa fa-exchange" aria-hidden="true"></i>
-                      <%=offer.barter%>
-                    </li>
-                  </ul>
 
-                </div>
-
-              </div>
-              <div class="application-view text-center card-divider">
-              <ul id="application-list">
-              <%offer.appliedUsers.forEach((application, arrIndex) => {%>
-                <li>
-                <a href="/offers/<%=offer.id%>/applications/<%=arrIndex%>/delete"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-                  <%=application%>
-                </li>
-              <%});%>
-              </ul>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Created on <%=offer.createdAt.toDateString()%></small>
-              </div>
-              <%})%>
+              </form>
             </div>
-        </div>
-      </div>
+
+            <div class="col-md-3">
+
+              <div class="card-deck">
+                <%listOfOffers.forEach((offer) => {%>
+                  <div class="card ride-card my-ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
+                    <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      <%=offer.destination%></h4>
+                    <div class="departure-date-time text-center card-divider">
+                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                      <%=offer.departureDate.toDateString()%><br>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <%=offer.departureTime%>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i>
+                            <%=offer.car%>
+                          </li>
+                          <li class="list-group-item offer-info-line"><i class="fa fa-users" aria-hidden="true"></i>
+                            <%=offer.spaces%>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item offer-info-line"><i class="fa fa-paw" aria-hidden="true"></i>
+
+                            <%if(offer.pets === "true"){ %>
+                              <span>allowed!</span>
+                              <%} else {%>
+                                <span>no</span>
+                                <%}%>
+                          </li>
+                          <li class="list-group-item offer-info-line"><i class="fa fa-exchange" aria-hidden="true"></i>
+                            <%=offer.barter%>
+                          </li>
+                        </ul>
+
+                      </div>
+
+                    </div>
+                    <div class="application-view text-center card-divider">
+                      <h6 class="center-text">Requests:</h6>
+                      <ul id="application-list">
+                        <%offer.appliedUsers.forEach((application, arrIndex) => {%>
+                          <li>
+                            <a href="/offers/<%=offer.id%>/applications/<%=arrIndex%>/delete"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                            <%=application%>
+                          </li>
+                          <%});%>
+                      </ul>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Created on <%=offer.createdAt.toDateString()%></small>
+                    </div>
+                    <%})%>
+                  </div>
+              </div>
+            </div>
 
 
 
 
-    </div>
-  </div>
-  </div>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap">
-  </script>
-  <script>
-    // This example requires the Places library. Include the libraries=places
-    // parameter when you first load the API. For example:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+          </div>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap">
+        </script>
+        <script>
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('directionMap'), {
-        mapTypeControl: false,
-        center: {
-          lat: -33.8688,
-          lng: 151.2195
-        },
-        zoom: 12,
-        zoomControl: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        rotateControl: false,
-        fullscreenControl: false
-      });
+          function initMap() {
+            var map = new google.maps.Map(document.getElementById('directionMap'), {
+              mapTypeControl: false,
+              center: {
+                lat: -33.8688,
+                lng: 151.2195
+              },
+              zoom: 12,
+              zoomControl: false,
+              mapTypeControl: false,
+              streetViewControl: false,
+              rotateControl: false,
+              fullscreenControl: false
+            });
 
-      new AutocompleteDirectionsHandler(map);
-    }
+            new AutocompleteDirectionsHandler(map);
+          }
 
-    /**
-     * @constructor
-     */
-    function AutocompleteDirectionsHandler(map) {
-      this.map = map;
-      this.originPlaceId = null;
-      this.destinationPlaceId = null;
-      this.travelMode = 'DRIVING';
-      var originInput = document.getElementById('gmaps-origin-input');
-      var destinationInput = document.getElementById('gmaps-destination-input');
-      var modeSelector = document.getElementById('mode-selector');
-      this.directionsService = new google.maps.DirectionsService;
-      this.directionsDisplay = new google.maps.DirectionsRenderer;
-      this.directionsDisplay.setMap(map);
+          /**
+           * @constructor
+           */
+          function AutocompleteDirectionsHandler(map) {
+            this.map = map;
+            this.originPlaceId = null;
+            this.destinationPlaceId = null;
+            this.travelMode = 'DRIVING';
+            var originInput = document.getElementById('gmaps-origin-input');
+            var destinationInput = document.getElementById('gmaps-destination-input');
+            var modeSelector = document.getElementById('mode-selector');
+            this.directionsService = new google.maps.DirectionsService;
+            this.directionsDisplay = new google.maps.DirectionsRenderer;
+            this.directionsDisplay.setMap(map);
 
-      var originAutocomplete = new google.maps.places.Autocomplete(
-        originInput, {
-          placeIdOnly: true
-        });
-      var destinationAutocomplete = new google.maps.places.Autocomplete(
-        destinationInput, {
-          placeIdOnly: true
-        });
+            var originAutocomplete = new google.maps.places.Autocomplete(
+              originInput, {
+                placeIdOnly: true
+              });
+            var destinationAutocomplete = new google.maps.places.Autocomplete(
+              destinationInput, {
+                placeIdOnly: true
+              });
 
-      // this.setupClickListener('changemode-walking', 'WALKING');
-      // this.setupClickListener('changemode-transit', 'TRANSIT');
-      // this.setupClickListener('changemode-driving', 'DRIVING');
+            // this.setupClickListener('changemode-walking', 'WALKING');
+            // this.setupClickListener('changemode-transit', 'TRANSIT');
+            // this.setupClickListener('changemode-driving', 'DRIVING');
 
-      this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-      this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+            this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+            this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
-    }
+          }
 
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-      var radioButton = document.getElementById(id);
-      var me = this;
-      radioButton.addEventListener('click', function() {
-        me.travelMode = mode;
-        me.route();
-      });
-    };
+          // Sets a listener on a radio button to change the filter type on Places
+          // Autocomplete.
+          AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+            var radioButton = document.getElementById(id);
+            var me = this;
+            radioButton.addEventListener('click', function() {
+              me.travelMode = mode;
+              me.route();
+            });
+          };
 
-    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
-      var me = this;
-      autocomplete.bindTo('bounds', this.map);
-      autocomplete.addListener('place_changed', function() {
-        var place = autocomplete.getPlace();
-        if (!place.place_id) {
-          window.alert("Please select an option from the dropdown list.");
-          return;
-        }
-        if (mode === 'ORIG') {
-          me.originPlaceId = place.place_id;
-        } else {
-          me.destinationPlaceId = place.place_id;
-        }
-        me.route();
-      });
+          AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+            var me = this;
+            autocomplete.bindTo('bounds', this.map);
+            autocomplete.addListener('place_changed', function() {
+              var place = autocomplete.getPlace();
+              if (!place.place_id) {
+                window.alert("Please select an option from the dropdown list.");
+                return;
+              }
+              if (mode === 'ORIG') {
+                me.originPlaceId = place.place_id;
+              } else {
+                me.destinationPlaceId = place.place_id;
+              }
+              me.route();
+            });
 
-    };
+          };
 
-    AutocompleteDirectionsHandler.prototype.route = function() {
-      if (!this.originPlaceId || !this.destinationPlaceId) {
-        return;
-      }
-      var me = this;
+          AutocompleteDirectionsHandler.prototype.route = function() {
+            if (!this.originPlaceId || !this.destinationPlaceId) {
+              return;
+            }
+            var me = this;
 
-      this.directionsService.route({
-        origin: {
-          'placeId': this.originPlaceId
-        },
-        destination: {
-          'placeId': this.destinationPlaceId
-        },
-        travelMode: this.travelMode
-      }, function(response, status) {
-        if (status === 'OK') {
-          console.log(response)
+            this.directionsService.route({
+              origin: {
+                'placeId': this.originPlaceId
+              },
+              destination: {
+                'placeId': this.destinationPlaceId
+              },
+              travelMode: this.travelMode
+            }, function(response, status) {
+              if (status === 'OK') {
+                console.log(response)
 
 
 
-          // console.log(document.getElementById("origin-input").value);
-          document.getElementById("origin-lat").value = response.routes["0"].legs["0"].start_location.lat();
-          document.getElementById("origin-lng").value = response.routes["0"].legs["0"].start_location.lng();
-          document.getElementById("destination-lat").value = response.routes["0"].legs["0"].end_location.lat();
-          document.getElementById("destination-lng").value = response.routes["0"].legs["0"].end_location.lng();
-          document.getElementById("origin-input").value = response.routes["0"].legs["0"].start_address;
-          document.getElementById("destination-input").value = response.routes["0"].legs["0"].end_address;
+                // console.log(document.getElementById("origin-input").value);
+                document.getElementById("origin-lat").value = response.routes["0"].legs["0"].start_location.lat();
+                document.getElementById("origin-lng").value = response.routes["0"].legs["0"].start_location.lng();
+                document.getElementById("destination-lat").value = response.routes["0"].legs["0"].end_location.lat();
+                document.getElementById("destination-lng").value = response.routes["0"].legs["0"].end_location.lng();
+                document.getElementById("origin-input").value = response.routes["0"].legs["0"].start_address;
+                document.getElementById("destination-input").value = response.routes["0"].legs["0"].end_address;
 
-          document.getElementById("origin-placeid").value = response.request.destination.placeId;
-          document.getElementById("destination-placeid").value = response.request.origin.placeId;
+                document.getElementById("origin-placeid").value = response.request.destination.placeId;
+                document.getElementById("destination-placeid").value = response.request.origin.placeId;
 
-          document.getElementById("route-distance").innerHTML = response.routes["0"].legs["0"].distance.text;
-          document.getElementById("route-distance-value").value = response.routes["0"].legs["0"].distance.value;
-          document.getElementById("route-duration").innerHTML = response.routes["0"].legs["0"].duration.text;
-          console.log(response);
-          me.directionsDisplay.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to ' + status);
-        }
-      });
-    };
-  </script>
-  <script>
-    //slider on-the-fly updating
-    document.getElementById("mpg-slider").value = 30;
+                document.getElementById("route-distance").innerHTML = response.routes["0"].legs["0"].distance.text;
+                document.getElementById("route-distance-value").value = response.routes["0"].legs["0"].distance.value;
+                document.getElementById("route-duration").innerHTML = response.routes["0"].legs["0"].duration.text;
+                console.log(response);
+                me.directionsDisplay.setDirections(response);
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+            });
+          };
+        </script>
+        <script>
+          //slider on-the-fly updating
+          document.getElementById("mpg-slider").value = 30;
 
-    var listener = function() {
-      window.requestAnimationFrame(function() {
-        document.getElementById("slider-mpg-value").innerHTML = document.getElementById("mpg-slider").value;
-        const sliderMpgValue = document.getElementById("mpg-slider").value;
-        const distanceMeters = document.getElementById("route-distance-value").value;
-        const gallonsRequired = document.getElementById("gallons-required");
-        gallonsRequired.innerHTML = parseFloat((distanceMeters / 1609.344) / sliderMpgValue).toFixed(2);
-      });
-    };
+          var listener = function() {
+            window.requestAnimationFrame(function() {
+              document.getElementById("slider-mpg-value").innerHTML = document.getElementById("mpg-slider").value;
+              const sliderMpgValue = document.getElementById("mpg-slider").value;
+              const distanceMeters = document.getElementById("route-distance-value").value;
+              const gallonsRequired = document.getElementById("gallons-required");
+              gallonsRequired.innerHTML = parseFloat((distanceMeters / 1609.344) / sliderMpgValue).toFixed(2);
+            });
+          };
 
-    const sliderMpg = document.getElementById("mpg-slider");
-    sliderMpg.addEventListener("mousedown", function() {
-      listener();
-      sliderMpg.addEventListener("mousemove", listener);
-    });
-    sliderMpg.addEventListener("mouseup", function() {
-      sliderMpg.removeEventListener("mousemove", listener);
-    });
-  </script>
-  <script>
-    //click listener to show form on Edit click
-    // const rideForm = document.getElementById("ride-form");
-    // const editRideBtn = document.getElementById("edit-ride-button");
-    // editRideBtn.onclick = function() {
-    //   rideForm.style.display = "block";
-    //   rideForm.classList.remove("hidden");
-    // };
-  </script>
+          const sliderMpg = document.getElementById("mpg-slider");
+          sliderMpg.addEventListener("mousedown", function() {
+            listener();
+            sliderMpg.addEventListener("mousemove", listener);
+          });
+          sliderMpg.addEventListener("mouseup", function() {
+            sliderMpg.removeEventListener("mousemove", listener);
+          });
+        </script>
+        <script>
+          date = new Date('2013-08-03T02:00:00Z');
+          year = date.getFullYear();
+          month = date.getMonth() + 1;
+          dt = date.getDate();
 
-  <script>
-    date = new Date('2013-08-03T02:00:00Z');
-    year = date.getFullYear();
-    month = date.getMonth() + 1;
-    dt = date.getDate();
+          if (dt < 10) {
+            dt = '0' + dt;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
 
-    if (dt < 10) {
-      dt = '0' + dt;
-    }
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    console.log(year + '-' + month + '-' + dt);
-  </script>
+          console.log(year + '-' + month + '-' + dt);
+        </script>
