@@ -6,6 +6,11 @@
 
 $(document).ready(function($) {
 
+  $(".logo").hover(function (){
+    $("#main-logo").toggleClass("hidden");
+    $("#alt-logo").toggleClass("hidden");
+  });
+
   $(".card.ride-card").hide();
   $(".card.offer-ride-card").show();
 

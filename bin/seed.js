@@ -84,5 +84,8 @@ OfferModel.create(
       console.log("create seed error", err);
       return;
     }
+    productsAfterSave.forEach((product) => {
+      console.log("Product ---> ", product.name);
+    });
   }
 );
