@@ -5,7 +5,9 @@ $alt: #eee;
 .navbar-light .navbar-nav .active>.nav-link{
   color: $base;
 }
-
+#logo{
+  max-width: 350px;
+}
 body {
   padding: 50px;
   font-family: "Roboto", sans-serif;
@@ -187,9 +189,12 @@ h3 {
 }
 
 .cat--1,
-.cat--2,
-.cat-0 {
+.cat--2{
   display: none;
+}
+
+.cat-0 h5{
+  color: #AFF25E;
 }
 
 .windy-iframe {
@@ -205,6 +210,7 @@ h3 {
   width: 290px;
   margin-bottom: 10px;
 }
+
 
 #route-info-pane {
   margin: 0 auto;
@@ -301,6 +307,13 @@ footer {
 
 nav {
   margin-bottom: 50px;
+  font-size: 1.5rem;
+  padding: 0 10px !important;
+  background-color: #eee !important;
+  li{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 // .stroke {
