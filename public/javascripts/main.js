@@ -7,17 +7,18 @@
 $(document).ready(function($) {
 
   $(".card.ride-card").hide();
+  $(".card.offer-ride-card").show();
 
 
   const windyUrl = $("#windy-iframe").attr("src");
 
   $.ajax({
-    url: "http://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
+    url: "https://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
     dataType: "jsonp",
     success: function(parsed_json) {
       console.log(parsed_json);
       const firstStorm = parsed_json.currenthurricane[0].stormInfo.stormNumber;
-      $("#wu-map-img").attr("src", `http://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
+      $("#wu-map-img").attr("src", `https://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
 
       parsed_json.currenthurricane.forEach((hurricane) => {
         const hName = hurricane.stormInfo.stormName_Nice;

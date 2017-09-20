@@ -120,7 +120,7 @@ passport.use(
       proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+      console.log("google profile obj", profile);
       UserModel.findOne(
         {googleID: profile.id},
         (err, userFromDb) => {
@@ -134,7 +134,8 @@ passport.use(
           }
           const theUser = new UserModel({
             googleID: profile.id,
-            email: profile.emails[0].value
+            email: profile.emails[0].value,
+            avatarUrl: profile.image.url
           });
           theUser.save((err) => {
             if(err){

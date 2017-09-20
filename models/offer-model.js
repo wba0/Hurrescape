@@ -50,6 +50,7 @@ const offerSchema = new Schema({
   //the mongo ID of the user that this offer belongs to
   owner: {
     type: Schema.Types.ObjectId,
+    ref: "User",
     required: true
   },
   ownerAvatar: {

@@ -67,36 +67,35 @@
 
 
             <div class="row card-row justify-content-md-center">
-              <div class="card-deck">
                 <%listOfOffers.forEach((offer) => {%>
+                  <div class="card-deck">
                   <div class="col-md-4">
-                  <%=offer.owner%>
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
                       <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                         <%=offer.destination%></h4>
                       <br>
                       <h5 class="text-center"> with: <%=offer.owner.email%></h5>
                       <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.owner.avatarUrl%>" alt="Card image cap" onerror="this.src='images/default.png'">
-                      <div class="departure-date-time text-center">
-                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                      <div class="departure-date-time text-center card-divider">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" title="Departure Date"></i>
                         <%=offer.departureDate.toDateString()%><br>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          <i class="fa fa-clock-o" aria-hidden="true" title="Departure Time"></i>
                           <%=offer.departureTime%>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <ul class="list-group list-group-flush">
-                            <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true"></i>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true" title="Car Type"></i>
                               <%=offer.car%>
                             </li>
-                            <li class="list-group-item offer-info-line"><i class="fa fa-users" aria-hidden="true"></i>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-users" aria-hidden="true" title="Spaces Available"></i>
                               <%=offer.spaces%>
                             </li>
                           </ul>
                         </div>
                         <div class="col-md-6">
                           <ul class="list-group list-group-flush">
-                            <li class="list-group-item offer-info-line"><i class="fa fa-paw" aria-hidden="true"></i>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-paw" aria-hidden="true" title="Pets Allowed"></i>
 
                               <%if(offer.pets === "true"){ %>
                                 <span>allowed!</span>
@@ -104,7 +103,7 @@
                                   <span>no</span>
                                   <%}%>
                             </li>
-                            <li class="list-group-item offer-info-line"><i class="fa fa-exchange" aria-hidden="true"></i>
+                            <li class="list-group-item offer-info-line"><i class="fa fa-exchange" aria-hidden="true" title="Barter Item"></i>
                               <%=offer.barter%>
                             </li>
                           </ul>
@@ -120,12 +119,12 @@
                         </form>
                       </div>
                       <div class="card-footer">
-                        <small class="text-muted">Created on <%=offer.createdAt.toDateString()%></small>
+                        <small class="text-muted">Created on <%=offer.createdAt.toDateString()%>.</small>
                       </div>
                     </div>
                   </div>
+                  </div>
                   <%})%>
-              </div>
             </div>
           </div>
 
@@ -419,13 +418,13 @@
                 var searchedOrigin = place.formatted_address;
 
                 console.log(searchedOrigin);
-                console.log($(".ride-card").attr("data-origin"));
+                console.log(place.geometry.location.lat());
+                console.log(place.geometry.location.lng());
 
-                if ($(".ride-card").attr("data-origin") === searchedOrigin  ) {
+
                   const matchedCard = $('.ride-card[data-origin="' + searchedOrigin + '"]');
                   matchedCard.show();
-                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
-                }
+
 
                 //-----------------------------------------------------------------
 
@@ -470,11 +469,8 @@
                 var searchedDestination = placeD.formatted_address;
 
 
-                if ($(".ride-card").attr("data-destination") === searchedDestination) {
                   const matchedCard = $('.ride-card[data-destination="' + searchedDestination + '"]');
                   matchedCard.show();
-                  // $('.ride-card[data-origin=`${searchedOrigin}`]').show();
-                }
 
                 document.getElementById("destination-lat").value = placeD.geometry.location.lat();
                 document.getElementById("destination-lng").value = placeD.geometry.location.lng();

@@ -20,9 +20,9 @@ router.get("/offers", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       // res.locals.securityFeedback = securityError;
       // res.locals.updateFeedback = req.flash("updateSuccess");
       res.locals.listOfOffers = offersFromDb;
+      res.locals.applicationDeleteSuccessMsg = req.flash("applicationDeleteSuccess");
       res.render("offer-views/offers.ejs");
 
-      res.locals.applicationDeleteSuccessMsg = req.flash("applicationDeleteSuccess");
 
 
     }

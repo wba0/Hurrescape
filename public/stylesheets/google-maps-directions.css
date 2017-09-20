@@ -1,7 +1,8 @@
 #directionMap{
   max-width: 600px;
-  height: 35%;
+  height: 350px;
   margin: 0 auto;
+  margin-top: 22px;
 }
 
 .controls {
