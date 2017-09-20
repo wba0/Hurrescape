@@ -3,7 +3,7 @@ const router = express.Router();
 const OfferModel = require('../models/offer-model.js');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get("/", (req, res, next) => {
     OfferModel
       .find({})
       .populate("owner")
@@ -26,10 +26,12 @@ router.get('/', (req, res, next) => {
           // res.render("index.ejs")
         }
         res.render("index.ejs")
-
       }
   );
-
 });
+
+router.get("/faq", (req, res, next) => {
+  res.render("faq.ejs");
+})
 
 module.exports = router;

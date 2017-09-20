@@ -353,3 +353,27 @@ nav {
 display: block;
 margin-bottom: 10px;
 }
+
+.panel-heading{
+  margin: 15px 0;
+  a{
+    &:hover{
+      color: #000;
+    }
+  text-decoration: none;}
+  background: $alt;
+padding: 15px;
+border-radius: 5px;
+}
+
+.panel-collapse{
+  padding: 20px;
+    border: $base 1px solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#faq-accordion{
+  max-width: 900px;
+  margin: 0 auto;
+}
