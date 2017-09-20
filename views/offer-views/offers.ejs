@@ -198,7 +198,7 @@
               <div class="card-deck">
                 <%listOfOffers.forEach((offer) => {%>
                   <div class="card ride-card my-ride-card offer-ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
-                    <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    <h4 class="card-header text-center"><%=offer.origin%><br> <i class="fa fa-arrow-circle-down pointer-icon" aria-hidden="true"></i><br>
                       <%=offer.destination%></h4>
                     <div class="departure-date-time text-center card-top">
                       <i class="fa fa-calendar-check-o" aria-hidden="true" title="Departure Date"></i>
@@ -207,7 +207,7 @@
                         <%=offer.departureTime%>
                     </div>
                     <div class="card-divider">
-                      <div class="row ">
+                      <div class="row text-center">
                         <div class="col-md-6">
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true" title="Car Type"></i>

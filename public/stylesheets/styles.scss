@@ -306,9 +306,8 @@ footer {
 }
 
 nav {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-size: 1.3rem;
-  padding: 0 10px !important;
   background-color: #eee !important;
   li{
     padding-left: 5px;
@@ -343,4 +342,14 @@ nav {
 .card-top,
 .card-bottom{
   padding: 20px 0;
+}
+
+.pointer-icon{
+  margin: 10px 0;
+}
+
+.find-ride-gmaps-input{
+  margin: 0 auto;
+display: block;
+margin-bottom: 10px;
 }

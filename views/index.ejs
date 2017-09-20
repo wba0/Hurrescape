@@ -44,18 +44,18 @@
 
               <div class="form-group col-md-5 map-group">
                 <div id="originMap"></div>
-                <label for="origin">Origin City</label>
+                <label for="origin" class="find-ride-gmaps-input">Origin City</label>
                 <div id="pac-container">
-                  <input class="form-control" id="pac-input" type="text" placeholder="Origin City" name="originCity">
+                  <input class="form-control" id="pac-input" type="text" placeholder="Miami, FL" name="originCity">
                 </div>
                 <input id="origin-lat" type="hidden" name="originCityLatLng[]" value="">
                 <input id="origin-lng" type="hidden" name="originCityLatLng[]" value="">
               </div>
               <div class="form-group col-md-5 map-group">
                 <div id="destinationMap"></div>
-                <label for="destination">Destination City</label>
+                <label for="destination" class="find-ride-gmaps-input">Destination City</label>
                 <div id="pac-container-destination">
-                  <input class="form-control" id="pac-input-destination" type="text" placeholder="Destination City" name="destinationCity">
+                  <input class="form-control" id="pac-input-destination" type="text" placeholder="Orlando, FL" name="destinationCity">
                 </div>
                 <input id="destination-lat" type="hidden" name="destinationCityLatLng[]" value="">
                 <input id="destination-lng" type="hidden" name="destinationCityLatLng[]" value="">
@@ -71,8 +71,8 @@
                   <div class="card-deck">
                   <div class="col-md-4">
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
-                      <h4 class="card-header"><%=offer.origin%> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                        <%=offer.destination%></h4>
+                    <h4 class="card-header text-center"><%=offer.origin%><br> <i class="fa fa-arrow-circle-down pointer-icon" aria-hidden="true"></i><br>
+                      <%=offer.destination%></h4>
                       <br>
                       <h5 class="text-center"> with: <%=offer.owner.email%></h5>
                       <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.owner.avatarUrl%>" alt="Card image cap" onerror="this.src='images/default.png'">
@@ -82,7 +82,7 @@
                           <i class="fa fa-clock-o" aria-hidden="true" title="Departure Time"></i>
                           <%=offer.departureTime%>
                       </div>
-                      <div class="row">
+                      <div class="row text-center">
                         <div class="col-md-6">
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item offer-info-line"><i class="fa fa-car" aria-hidden="true" title="Car Type"></i>
