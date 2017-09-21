@@ -87,7 +87,7 @@ OfferModel.create(
       return;
     }
     offersAfterSave.forEach((offer) => {
-      console.log("Offer ---> ", offer.name);
+      console.log("Offer ---> ", offer._id);
     });
   }
 );
