@@ -395,9 +395,11 @@
 
             //triggers Gmaps to autocomplete when form information is prefilled for editing a ride
             const directionThing = new AutocompleteDirectionsHandler(map);
-            directionThing.originPlaceId = '<%=listOfOffers[0].originPlaceId%>';
-            directionThing.destinationPlaceId = '<%=listOfOffers[0].destinationPlaceId%>';
-            directionThing.route();
+            <%if(listOfOffers.length > 0){%>
+              directionThing.originPlaceId = '<%=listOfOffers[0].originPlaceId%>';
+              directionThing.destinationPlaceId = '<%=listOfOffers[0].destinationPlaceId%>';
+              directionThing.route();
+            <%}%>
           } //close initMap
 
           /**

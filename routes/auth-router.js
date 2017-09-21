@@ -44,9 +44,11 @@ router.post("/process-signup", myUploader.single("avatarUrl"), (req, res, next) 
 
       const theUser = new UserModel({
         email: req.body.signupEmail,
-        encryptedPassword: scrambledPass,
-        avatarUrl: "/uploads/" + req.file.filename
+        encryptedPassword: scrambledPass
       });
+      if(req.file){
+        theUser.avatarUrl = "/uploads/" + req.file.filename;
+      }
       theUser.save((err) => {
         if (err) {
           next(err);
