@@ -394,11 +394,11 @@
             });
 
             //triggers Gmaps to autocomplete when form information is prefilled for editing a ride
-            const directionThing = new AutocompleteDirectionsHandler(map);
+            const editFormGmapFiller = new AutocompleteDirectionsHandler(map);
             <%if(listOfOffers.length > 0){%>
-              directionThing.originPlaceId = '<%=listOfOffers[0].originPlaceId%>';
-              directionThing.destinationPlaceId = '<%=listOfOffers[0].destinationPlaceId%>';
-              directionThing.route();
+              editFormGmapFiller.originPlaceId = '<%=listOfOffers[0].originPlaceId%>';
+              editFormGmapFiller.destinationPlaceId = '<%=listOfOffers[0].destinationPlaceId%>';
+              editFormGmapFiller.route();
             <%}%>
           } //close initMap
 
