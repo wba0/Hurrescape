@@ -4,6 +4,11 @@ $alt: #eee;
 
 .navbar-light .navbar-nav .active > .nav-link {
   color: $base;
+
+}
+
+.navbar{
+  padding-bottom: 20px;
 }
 
 .logo {
@@ -11,7 +16,7 @@ $alt: #eee;
 }
 
 body {
-  padding: 35px;
+  padding: 20px 35px;
   font-family: "Roboto", sans-serif;
 }
 
