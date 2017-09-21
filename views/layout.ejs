@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>
@@ -11,17 +12,18 @@
   <link rel="stylesheet" href="/stylesheets/styles.min.css">
   <script src="https://use.fontawesome.com/5e4b78a8fb.js"></script>
 </head>
+
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/"><img id="main-logo" class="logo" src="images/logo.png"></a>
+      <a class="navbar-brand" href="/"><img id="main-logo" class="logo" src="images/logo.png"></a>
       <a class="navbar-brand" href="/"><img id="alt-logo" class="logo hidden" src="images/logo-black.png"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
@@ -37,21 +39,21 @@
           <%# <li class="nav-item">
             <a class="nav-link" href="#">FAQ?</a>
           </li>%>
-          <li class="nav-item">
-            <a class="nav-link" href="/faq">About <span class="sr-only">(current)</span></a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/faq">About <span class="sr-only">(current)</span></a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <%if(currentUser){%>
 
             <li class="nav-item dropdown">
-            <img class="navbar-avatar" src="<%=currentUser.avatarUrl%>">
-            <a class="nav-link dropdown-toggle navbar-email" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%=currentUser.email%>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/logout">Logout</a>
-            </div>
+              <img class="navbar-avatar" src="<%=currentUser.avatarUrl%>">
+              <a class="nav-link dropdown-toggle navbar-email" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%=currentUser.email%>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
             </li>
 
             <%}else{%>
@@ -73,11 +75,14 @@
   <%- body %>
 
 
-  <footer class="footer">
-    <div class="container">
-    <h6 class="text-center">Dedicated to <a href="https://en.wikipedia.org/wiki/Hurricane_Irma">Irma</a>.</h6>
-  </div>
-  </footer>
+    <footer class="footer">
+
+
+          <span class="float-left">Dedicated to <a href="https://en.wikipedia.org/wiki/Hurricane_Irma" alt="Hurricane Irma">Irma</a>.</span>
+          <span class="float-right">View project on <a target="_blank" href="https://en.wikipedia.org/wiki/Hurricane_Irma"><i title="Github" class="fa fa-github" aria-hidden="true"></i>
+</a></span>
+
+    </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const OfferModel = require('../models/offer-model.js');
 
+require("dotenv").config();
+
 mongoose.connect(process.env.MONGODB_URI);
 
 const offerArray = [
@@ -84,8 +86,8 @@ OfferModel.create(
       console.log("create seed error", err);
       return;
     }
-    productsAfterSave.forEach((product) => {
-      console.log("Product ---> ", product.name);
+    offersAfterSave.forEach((offer) => {
+      console.log("Offer ---> ", offer.name);
     });
   }
 );

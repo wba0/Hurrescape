@@ -17,6 +17,7 @@
                 <%if(listOfOffers.length > 0){%>
                   value="<%=listOfOffers[0].origin%>"
                   <%}%>
+
                   >
                 <input class="form-control gmaps-inner-input" id="gmaps-destination-input" type="text" placeholder="Destination City"
                 <%if(listOfOffers.length > 0){%>
@@ -255,7 +256,7 @@
                           <%});%>
                       </ul>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-center">
                       <small class="text-muted">Created on <%=offer.createdAt.toDateString()%>.</small>
                     </div>
                     <%})%>
@@ -392,8 +393,12 @@
 ]
             });
 
-            new AutocompleteDirectionsHandler(map);
-          }
+            //triggers Gmaps to autocomplete when form information is prefilled for editing a ride
+            const directionThing = new AutocompleteDirectionsHandler(map);
+            directionThing.originPlaceId = '<%=listOfOffers[0].originPlaceId%>';
+            directionThing.destinationPlaceId = '<%=listOfOffers[0].destinationPlaceId%>';
+            directionThing.route();
+          } //close initMap
 
           /**
            * @constructor
@@ -440,6 +445,7 @@
           // };
 
           AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+
             var me = this;
             autocomplete.bindTo('bounds', this.map);
             autocomplete.addListener('place_changed', function() {

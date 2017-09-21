@@ -5,12 +5,16 @@
 
 
 $(document).ready(function($) {
+  //set active class to nav link for current page
+  $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
 
+  //logo alternation
   $(".logo").hover(function (){
     $("#main-logo").toggleClass("hidden");
     $("#alt-logo").toggleClass("hidden");
   });
 
+  //what?
   $(".card.ride-card").hide();
   $(".card.offer-ride-card").show();
 

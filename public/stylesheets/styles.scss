@@ -2,14 +2,16 @@
 $base: #00B7FF;
 $alt: #eee;
 
-.navbar-light .navbar-nav .active>.nav-link{
+.navbar-light .navbar-nav .active > .nav-link {
   color: $base;
 }
-.logo{
+
+.logo {
   width: 350px;
 }
+
 body {
-  padding: 50px;
+  padding: 35px;
   font-family: "Roboto", sans-serif;
 }
 
@@ -26,10 +28,9 @@ h3 {
 
 .index-h3 {
   padding: 10px 20px;
-  background: #eee;
+  border: 2px solid $alt;
   max-width: 240px;
-  margin: 0 auto 10px;
-  margin-bottom: 50px;
+  margin: 0 auto 50px;
   border-radius: 5px;
 }
 
@@ -92,10 +93,11 @@ h3 {
   // margin: 0 10%;
 }
 
-.card-deck .card{
+.card-deck .card {
   min-width: 400px;
   margin: 20px;
 }
+
 .form-signin {
   max-width: 500px;
   margin: 0 auto;
@@ -189,11 +191,11 @@ h3 {
 }
 
 .cat--1,
-.cat--2{
+.cat--2 {
   display: none;
 }
 
-.cat-0 h5{
+.cat-0 h5 {
   color: #AFF25E;
 }
 
@@ -210,7 +212,6 @@ h3 {
   width: 290px;
   margin-bottom: 10px;
 }
-
 
 #route-info-pane {
   margin: 0 auto;
@@ -230,7 +231,8 @@ h3 {
   margin: 0 auto;
   width: 600px;
   text-align: center;
-  input{
+
+  input {
     margin: 20px 0;
   }
 }
@@ -289,16 +291,20 @@ h3 {
 }
 
 footer {
-  background-color: $alt;
+  border-top: 1px solid $base;
   margin-top: 100px;
   bottom: 0;
   width: 100%;
   height: 60px;
   line-height: 60px;
-  border-radius: 5px;
 
-  h6 {
-    padding: 20px 50px;
+  span {
+    margin: 0 40px;
+
+    .fa {
+      font-size: 1.5em;
+      margin-left:5px;
+    }
 
     a {
       text-decoration: none;
@@ -309,14 +315,13 @@ footer {
 nav {
   margin-bottom: 30px;
   font-size: 1.3rem;
-  border-radius: 5px;
-  background-color: #eee !important;
-  li{
+  border-bottom: 1px solid $base;
+
+  li {
     padding-left: 5px;
     padding-right: 5px;
   }
 }
-
 // .stroke {
 //   /* WebKit (Safari/Chrome) Only */
 //   -webkit-text-stroke: 1px white;
@@ -337,51 +342,55 @@ nav {
 //     1px  1px 0 #000;
 // }
 
-.selected-storm{
+.selected-storm {
   background-color: #000 !important;
 }
 
-.card-top,
-.card-bottom{
+.card-bottom,
+.card-top {
   padding: 20px 0;
 }
 
-.pointer-icon{
+.pointer-icon {
   margin: 10px 0;
 }
 
-.find-ride-gmaps-input{
+.find-ride-gmaps-input {
   margin: 0 auto;
-display: block;
-margin-bottom: 10px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.panel-heading{
+.panel-heading {
   margin: 15px 0;
-  a{
-    &:hover{
+
+  a {
+    &:hover {
       color: #000;
     }
-  text-decoration: none;}
+    text-decoration: none;
+  }
   background: $alt;
-padding: 15px;
-border-radius: 5px;
-}
-.panel{
-cursor: pointer;}
-.panel-collapse{
-  padding: 20px;
-    border: $base 1px solid;
-    border-radius: 5px;
-    margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-#faq-accordion{
+.panel {
+  cursor: pointer;
+}
+
+.panel-collapse {
+  padding: 20px;
+  border: $base 1px solid;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+#faq-accordion {
   max-width: 900px;
   margin: 0 auto;
 }
 
-.navbar-brand{
-  
+.navbar-brand {
   margin-right: 0;
 }
