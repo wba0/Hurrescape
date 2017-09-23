@@ -40,11 +40,11 @@ $(document).ready(function($) {
         const hWindGusts = hurricane.Current.WindGust.Mph;
 
         const mapUrl = `http://icons.wunderground.com/data/images/${hNumber}_5day.gif`;
-        if (hCat >= 0) {
+        // if (hCat >= 0) {
           $("#windy-container").append(`<iframe class="windy-iframe windy-${hNumber}" width="750" height="480"
           src="https://embed.windy.com/embed2.html?lat=${hLat}&lon=${hLng}&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=coordinates&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
           </iframe>`);
-        }
+        // }
 
         $("#storm-list").append(
           `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
