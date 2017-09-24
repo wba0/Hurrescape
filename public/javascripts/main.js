@@ -14,6 +14,16 @@ $(document).ready(function($) {
     $("#alt-logo").toggleClass("hidden");
   });
 
+  //tropical storm toggle
+  $("#tropicalstorm-toggle").change(function() {
+     console.log($(this).prop('checked'));
+     $(".cat-0").toggle();
+     $(".cat--1").toggle();
+     $(".cat--2").toggle();
+     console.log($("#storm-list .isHurricanetrue").first());
+     $("#storm-list .isHurricanetrue").trigger("click");
+   })
+
   //what?
   $(".card.ride-card").hide();
   $(".card.offer-ride-card").show();
@@ -38,17 +48,22 @@ $(document).ready(function($) {
         const hCat = hurricane.Current.SaffirSimpsonCategory;
         const hWindSpeed = hurricane.Current.WindSpeed.Mph;
         const hWindGusts = hurricane.Current.WindGust.Mph;
+        let hOrNot;
+        hCat >= 0 ? hOrNot = true : hOrNot = false;
+
 
         const mapUrl = `http://icons.wunderground.com/data/images/${hNumber}_5day.gif`;
+        //restrict to hurricanes conditional
         // if (hCat >= 0) {
           $("#windy-container").append(`<iframe class="windy-iframe windy-${hNumber}" width="750" height="480"
           src="https://embed.windy.com/embed2.html?lat=${hLat}&lon=${hLng}&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=coordinates&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
           </iframe>`);
         // }
 
+
         $("#storm-list").append(
           `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
-          <h5 class="storm-name text-center stroke">${hName}</h5>
+          <h5 class="storm-name text-center stroke isHurricane${hOrNot}">${hName}</h5>
           <ul class="storm-stats">
           <li>
             <span>Category: ${hCat}</span>
