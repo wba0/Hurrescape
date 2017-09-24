@@ -5,41 +5,42 @@
 
   <%}%>
 
-<%if(applySuccessView.length > 0){%>
-  <p class="success-message">
-    <%=applySuccessView%>
-  </p>
-<%}%>
+    <%if(applySuccessView.length > 0){%>
+      <p class="success-message">
+        <%=applySuccessView%>
+      </p>
+      <%}%>
 
-      <%# <iframe id="windy-iframe" width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
+        <%# <iframe id="windy-iframe" width="900" height="600" src="https://embed.windy.com/embed2.html?lat=25.858&lon=-80.131&zoom=5&level=surface&overlay=wind&menu=true&message=&marker=&forecast=12&calendar=now&location=ip&type=map&actualGrid=&metricWind=kt&metricTemp=%C2%B0F" frameborder="0">
 
 </iframe>%>
 
-        <div class="row">
-          <div class="col-md-2 index-left-panel">
-            <ul class="list-group" id="storm-list">
-              <h5 class="text-center">Current Storm Information</h5>
+          <div class="row">
+            <div class="col-lg-2 col-md-12 index-left-panel">
+              <h3 class="text-center index-h3">Current Storm Information</h3>
               <div id="toggle-section">
+                <input class="text-center" id="tropicalstorm-toggle" type="checkbox" name="tropicalStormToggle" value="tropicalStormsOn" checked data-toggle="toggle">
+                <label for="tropicalstorm-toggle">Display Tropical Storms (<75 mph)</label>
+                </div>
 
-              <input class="text-center" id="tropicalstorm-toggle" type="checkbox" name="tropicalStormToggle" value="tropicalStormsOn" checked data-toggle="toggle">
-              <label for="tropicalstorm-toggle">Display Tropical Storms (<75 mph)</label>
+                <div class="list-group storm-list" id="accordion">
+
+                </div>
+          </div>
+
+
+
+              <div class="col-lg-5 col-md-12">
+                <h3 class="text-center index-h3">Wind Map</h3>
+                <div id="windy-container" class="embed-responsive embed-responsive-4by3">
+                </div>
+
               </div>
-            </ul>
-
+              <div class="col-lg-5 col-md-12">
+                <h3 class="text-center index-h3">Storm Tracking</h3>
+                <div id="tracking-container" class="embed-responsive embed-responsive-4by3"></div>
+              </div>
           </div>
-
-
-          <div class="col-md-5">
-            <h3 class="text-center index-h3">Wind Map</h3>
-            <div id="windy-container" class="embed-responsive embed-responsive-16by9">
-            </div>
-
-          </div>
-          <div class="col-md-5">
-            <h3 class="text-center index-h3">Storm Tracking</h3>
-            <div id="tracking-container"></div>
-          </div>
-        </div>
 
           <div id="find-ride-section">
             <h3 class="mx-auto text-center index-h3">Find a Ride</h3>
@@ -71,11 +72,11 @@
 
 
             <div class="row card-row justify-content-md-center">
-                <%listOfOffers.forEach((offer) => {%>
-                  <div class="card-deck">
+              <%listOfOffers.forEach((offer) => {%>
+                <div class="card-deck">
                   <div class="col-md-4">
                     <div class="card ride-card" data-origin="<%=offer.origin%>" data-destination="<%=offer.destination%>">
-                    <h4 class="card-header text-center"><%=offer.origin%><br> <i class="fa fa-arrow-circle-down pointer-icon" aria-hidden="true"></i><br>
+                      <h4 class="card-header text-center"><%=offer.origin%><br> <i class="fa fa-arrow-circle-down pointer-icon" aria-hidden="true"></i><br>
                       <%=offer.destination%></h4>
                       <img class="d-block mx-auto card-img-top offer-avatar" src="<%=offer.owner.avatarUrl%>" alt="Card image cap" onerror="this.src='images/default.png'">
                       <div class="departure-date-time text-center card-divider">
@@ -124,385 +125,371 @@
                       </div>
                     </div>
                   </div>
-                  </div>
-                  <%})%>
+                </div>
+                <%})%>
             </div>
           </div>
 
           <%# <div class="filler-div"></div>%>
 
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
-          <script>
-            // This example requires the Places library. Include the libraries=places
-            // parameter when you first load the API. For example:
-            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-            function initMap() {
-              var originMap = new google.maps.Map(document.getElementById('originMap'), {
-                center: {
-                  lat: 25.765386,
-                  lng: -80.195815
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvKcCoWtaoF6g7rspGQKL1zWMtwliK6hw&libraries=places&callback=initMap" async defer></script>
+            <script>
+              // This example requires the Places library. Include the libraries=places
+              // parameter when you first load the API. For example:
+              // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+              function initMap() {
+                var originMap = new google.maps.Map(document.getElementById('originMap'), {
+                  center: {
+                    lat: 25.765386,
+                    lng: -80.195815
                   },
-                zoom: 8,
-                zoomControl: false,
-                mapTypeControl: false,
-                streetViewControl: false,
-                rotateControl: false,
-                fullscreenControl: false,
-                styles: [
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "hue": "#F1FF00"
-            },
-            {
-                "saturation": -27.4
-            },
-            {
-                "lightness": 9.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "stylers": [
-            {
-                "hue": "#0099FF"
-            },
-            {
-                "saturation": -20
-            },
-            {
-                "lightness": 36.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "stylers": [
-            {
-                "hue": "#00FF4F"
-            },
-            {
-                "saturation": 0
-            },
-            {
-                "lightness": 0
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "stylers": [
-            {
-                "hue": "#FFB300"
-            },
-            {
-                "saturation": -38
-            },
-            {
-                "lightness": 11.2
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "hue": "#00B6FF"
-            },
-            {
-                "saturation": 4.2
-            },
-            {
-                "lightness": -63.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "stylers": [
-            {
-                "hue": "#9FFF00"
-            },
-            {
-                "saturation": 0
-            },
-            {
-                "lightness": 0
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    }
-]
-              });
-
-              var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
-                center: {
-                  lat: 33.749711,
-                  lng: -84.388333
-                },
                   zoom: 8,
-                zoomControl: false,
-                mapTypeControl: false,
-                streetViewControl: false,
-                rotateControl: false,
-                fullscreenControl: false,
-                styles: [
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "hue": "#F1FF00"
-            },
-            {
-                "saturation": -27.4
-            },
-            {
-                "lightness": 9.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "stylers": [
-            {
-                "hue": "#0099FF"
-            },
-            {
-                "saturation": -20
-            },
-            {
-                "lightness": 36.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "stylers": [
-            {
-                "hue": "#00FF4F"
-            },
-            {
-                "saturation": 0
-            },
-            {
-                "lightness": 0
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "stylers": [
-            {
-                "hue": "#FFB300"
-            },
-            {
-                "saturation": -38
-            },
-            {
-                "lightness": 11.2
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "hue": "#00B6FF"
-            },
-            {
-                "saturation": 4.2
-            },
-            {
-                "lightness": -63.4
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "stylers": [
-            {
-                "hue": "#9FFF00"
-            },
-            {
-                "saturation": 0
-            },
-            {
-                "lightness": 0
-            },
-            {
-                "gamma": 1
-            }
-        ]
-    }
-]
-              });
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  streetViewControl: false,
+                  rotateControl: false,
+                  fullscreenControl: false,
+                  styles: [{
+                      "featureType": "landscape",
+                      "stylers": [{
+                          "hue": "#F1FF00"
+                        },
+                        {
+                          "saturation": -27.4
+                        },
+                        {
+                          "lightness": 9.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.highway",
+                      "stylers": [{
+                          "hue": "#0099FF"
+                        },
+                        {
+                          "saturation": -20
+                        },
+                        {
+                          "lightness": 36.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.arterial",
+                      "stylers": [{
+                          "hue": "#00FF4F"
+                        },
+                        {
+                          "saturation": 0
+                        },
+                        {
+                          "lightness": 0
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.local",
+                      "stylers": [{
+                          "hue": "#FFB300"
+                        },
+                        {
+                          "saturation": -38
+                        },
+                        {
+                          "lightness": 11.2
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "water",
+                      "stylers": [{
+                          "hue": "#00B6FF"
+                        },
+                        {
+                          "saturation": 4.2
+                        },
+                        {
+                          "lightness": -63.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "poi",
+                      "stylers": [{
+                          "hue": "#9FFF00"
+                        },
+                        {
+                          "saturation": 0
+                        },
+                        {
+                          "lightness": 0
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    }
+                  ]
+                });
 
-              var card = document.getElementById('pac-card');
-              var input = document.getElementById('pac-input');
+                var destinationMap = new google.maps.Map(document.getElementById('destinationMap'), {
+                  center: {
+                    lat: 33.749711,
+                    lng: -84.388333
+                  },
+                  zoom: 8,
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  streetViewControl: false,
+                  rotateControl: false,
+                  fullscreenControl: false,
+                  styles: [{
+                      "featureType": "landscape",
+                      "stylers": [{
+                          "hue": "#F1FF00"
+                        },
+                        {
+                          "saturation": -27.4
+                        },
+                        {
+                          "lightness": 9.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.highway",
+                      "stylers": [{
+                          "hue": "#0099FF"
+                        },
+                        {
+                          "saturation": -20
+                        },
+                        {
+                          "lightness": 36.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.arterial",
+                      "stylers": [{
+                          "hue": "#00FF4F"
+                        },
+                        {
+                          "saturation": 0
+                        },
+                        {
+                          "lightness": 0
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "road.local",
+                      "stylers": [{
+                          "hue": "#FFB300"
+                        },
+                        {
+                          "saturation": -38
+                        },
+                        {
+                          "lightness": 11.2
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "water",
+                      "stylers": [{
+                          "hue": "#00B6FF"
+                        },
+                        {
+                          "saturation": 4.2
+                        },
+                        {
+                          "lightness": -63.4
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    },
+                    {
+                      "featureType": "poi",
+                      "stylers": [{
+                          "hue": "#9FFF00"
+                        },
+                        {
+                          "saturation": 0
+                        },
+                        {
+                          "lightness": 0
+                        },
+                        {
+                          "gamma": 1
+                        }
+                      ]
+                    }
+                  ]
+                });
+
+                var card = document.getElementById('pac-card');
+                var input = document.getElementById('pac-input');
 
 
-              var cardD = document.getElementById('pac-card-destination');
-              var inputD = document.getElementById('pac-input-destination');
+                var cardD = document.getElementById('pac-card-destination');
+                var inputD = document.getElementById('pac-input-destination');
 
-              originMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-              destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(cardD);
+                originMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+                destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(cardD);
 
-              var autocomplete = new google.maps.places.Autocomplete(input);
-              var autocompleteD = new google.maps.places.Autocomplete(inputD);
+                var autocomplete = new google.maps.places.Autocomplete(input);
+                var autocompleteD = new google.maps.places.Autocomplete(inputD);
 
-              // Bind the map's bounds (viewport) property to the autocomplete object,
-              // so that the autocomplete requests use the current map bounds for the
-              // bounds option in the request.
-              autocomplete.bindTo('bounds', originMap);
-              autocompleteD.bindTo('bounds', destinationMap);
+                // Bind the map's bounds (viewport) property to the autocomplete object,
+                // so that the autocomplete requests use the current map bounds for the
+                // bounds option in the request.
+                autocomplete.bindTo('bounds', originMap);
+                autocompleteD.bindTo('bounds', destinationMap);
 
-              var infowindow = new google.maps.InfoWindow();
-              var infowindowContent = document.getElementById('infowindow-content');
-              infowindow.setContent(infowindowContent);
-              var marker = new google.maps.Marker({
-                map: originMap,
-                anchorPoint: new google.maps.Point(0, -29)
-              });
+                var infowindow = new google.maps.InfoWindow();
+                var infowindowContent = document.getElementById('infowindow-content');
+                infowindow.setContent(infowindowContent);
+                var marker = new google.maps.Marker({
+                  map: originMap,
+                  anchorPoint: new google.maps.Point(0, -29)
+                });
 
-              var infowindowD = new google.maps.InfoWindow();
-              var infowindowContentD = document.getElementById('infowindow-content-destination');
-              infowindowD.setContent(infowindowContentD);
-              var markerD = new google.maps.Marker({
-                map: destinationMap,
-                anchorPointD: new google.maps.Point(0, -29)
-              });
-
-
-              autocomplete.addListener('place_changed', function() {
-                $(".card.ride-card").hide();
+                var infowindowD = new google.maps.InfoWindow();
+                var infowindowContentD = document.getElementById('infowindow-content-destination');
+                infowindowD.setContent(infowindowContentD);
+                var markerD = new google.maps.Marker({
+                  map: destinationMap,
+                  anchorPointD: new google.maps.Point(0, -29)
+                });
 
 
-                infowindow.close();
-                marker.setVisible(false);
-                var place = autocomplete.getPlace();
+                autocomplete.addListener('place_changed', function() {
+                  $(".card.ride-card").hide();
 
-                //working on this ----------------------------------------------
-                var searchedOrigin = place.formatted_address;
 
-                console.log(place);
-                console.log(place.geometry.location.lat());
-                console.log(place.geometry.location.lng());
+                  infowindow.close();
+                  marker.setVisible(false);
+                  var place = autocomplete.getPlace();
+
+                  //working on this ----------------------------------------------
+                  var searchedOrigin = place.formatted_address;
+
+                  console.log(place);
+                  console.log(place.geometry.location.lat());
+                  console.log(place.geometry.location.lng());
 
 
                   const matchedCard = $('.ride-card[data-origin="' + searchedOrigin + '"]');
                   matchedCard.show();
 
 
-                //-----------------------------------------------------------------
+                  //-----------------------------------------------------------------
 
-                document.getElementById("origin-lat").value = place.geometry.location.lat();
-                document.getElementById("origin-lng").value = place.geometry.location.lng();
-                // $("#origin-lat-lng").value(oLatLngArr);
+                  document.getElementById("origin-lat").value = place.geometry.location.lat();
+                  document.getElementById("origin-lng").value = place.geometry.location.lng();
+                  // $("#origin-lat-lng").value(oLatLngArr);
 
-                if (!place.geometry) {
+                  if (!place.geometry) {
 
-                  window.alert("No details available for input: '" + place.name + "'");
-                  return;
-                }
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                  }
 
 
-                // If the place has a geometry, then present it on a map.
-                if (place.geometry.viewport) {
-                  originMap.fitBounds(place.geometry.viewport);
-                } else {
-                  originMap.setCenter(place.geometry.location);
-                  originMap.setZoom(17); // Why 17? Because it looks good.
-                }
-                marker.setPosition(place.geometry.location);
-                marker.setVisible(true);
+                  // If the place has a geometry, then present it on a map.
+                  if (place.geometry.viewport) {
+                    originMap.fitBounds(place.geometry.viewport);
+                  } else {
+                    originMap.setCenter(place.geometry.location);
+                    originMap.setZoom(17); // Why 17? Because it looks good.
+                  }
+                  marker.setPosition(place.geometry.location);
+                  marker.setVisible(true);
 
-                var address = '';
-                if (place.address_components) {
-                  address = [
-                    (place.address_components[0] && place.address_components[0].short_name || ''),
-                    (place.address_components[1] && place.address_components[1].short_name || ''),
-                    (place.address_components[2] && place.address_components[2].short_name || '')
-                  ].join(' ');
-                }
+                  var address = '';
+                  if (place.address_components) {
+                    address = [
+                      (place.address_components[0] && place.address_components[0].short_name || ''),
+                      (place.address_components[1] && place.address_components[1].short_name || ''),
+                      (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                  }
 
-              });
+                });
 
-              autocompleteD.addListener('place_changed', function() {
-                $(".card.ride-card").hide();
+                autocompleteD.addListener('place_changed', function() {
+                  $(".card.ride-card").hide();
 
-                infowindowD.close();
-                markerD.setVisible(false);
-                var placeD = autocompleteD.getPlace();
-                var searchedDestination = placeD.formatted_address;
+                  infowindowD.close();
+                  markerD.setVisible(false);
+                  var placeD = autocompleteD.getPlace();
+                  var searchedDestination = placeD.formatted_address;
 
 
                   const matchedCard = $('.ride-card[data-destination="' + searchedDestination + '"]');
                   matchedCard.show();
 
-                document.getElementById("destination-lat").value = placeD.geometry.location.lat();
-                document.getElementById("destination-lng").value = placeD.geometry.location.lng();
-                if (!placeD.geometry) {
+                  document.getElementById("destination-lat").value = placeD.geometry.location.lat();
+                  document.getElementById("destination-lng").value = placeD.geometry.location.lng();
+                  if (!placeD.geometry) {
 
-                  window.alert("No details available for input: '" + placeD.name + "'");
-                  return;
-                }
+                    window.alert("No details available for input: '" + placeD.name + "'");
+                    return;
+                  }
 
-                // If the place has a geometry, then present it on a map.
-                if (placeD.geometry.viewport) {
-                  destinationMap.fitBounds(placeD.geometry.viewport);
-                } else {
-                  destinationMap.setCenter(placeD.geometry.location);
-                  destinationMap.setZoom(17); // Why 17? Because it looks good.
-                }
-                markerD.setPosition(placeD.geometry.location);
-                markerD.setVisible(true);
+                  // If the place has a geometry, then present it on a map.
+                  if (placeD.geometry.viewport) {
+                    destinationMap.fitBounds(placeD.geometry.viewport);
+                  } else {
+                    destinationMap.setCenter(placeD.geometry.location);
+                    destinationMap.setZoom(17); // Why 17? Because it looks good.
+                  }
+                  markerD.setPosition(placeD.geometry.location);
+                  markerD.setVisible(true);
 
-                var addressD = '';
-                if (placeD.address_components) {
-                  addressD = [
-                    (placeD.address_components[0] && placeD.address_components[0].short_name || ''),
-                    (placeD.address_components[1] && placeD.address_components[1].short_name || ''),
-                    (placeD.address_components[2] && placeD.address_components[2].short_name || '')
-                  ].join(' ');
-                }
+                  var addressD = '';
+                  if (placeD.address_components) {
+                    addressD = [
+                      (placeD.address_components[0] && placeD.address_components[0].short_name || ''),
+                      (placeD.address_components[1] && placeD.address_components[1].short_name || ''),
+                      (placeD.address_components[2] && placeD.address_components[2].short_name || '')
+                    ].join(' ');
+                  }
 
-              });
+                });
 
 
 
-            }
-          </script>
+              }
+            </script>

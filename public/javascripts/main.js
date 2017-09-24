@@ -39,7 +39,7 @@ $(document).ready(function($) {
       const firstStorm = parsed_json.currenthurricane[0].stormInfo.stormNumber;
       $("#wu-map-img").attr("src", `https://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
 
-      parsed_json.currenthurricane.forEach((hurricane) => {
+      parsed_json.currenthurricane.forEach((hurricane, iteration) => {
         const hName = hurricane.stormInfo.stormName_Nice;
         const hNumber = hurricane.stormInfo.stormNumber;
         const hLat = hurricane.Current.lat;
@@ -61,34 +61,63 @@ $(document).ready(function($) {
         // }
 
 
-        $("#storm-list").append(
-          `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
-          <h5 class="storm-name text-center stroke isHurricane${hOrNot}">${hName}</h5>
-          <ul class="storm-stats">
-          <li>
-            <span>Category: ${hCat}</span>
-          </li>
-          <li>
-            <span>Pressure: ${hPressure} mb</span>
-          </li>
-          <li>
-            <span>Wind Speed: ${hWindSpeed} mph</span>
-          </li>
-          <li>
-            <span>Wind Gusts: ${hWindGusts} mph</span>
-          </li>
-        </li>`
+        // $("#storm-list").append(
+        //   `<li class="list-group-item cat-${hCat} storm-number-${hNumber}">
+        //   <h5 class="storm-name text-center stroke isHurricane${hOrNot}">${hName}</h5>
+        //   <ul class="storm-stats">
+        //   <li>
+        //     <span>Category: ${hCat}</span>
+        //   </li>
+        //   <li>
+        //     <span>Pressure: ${hPressure} mb</span>
+        //   </li>
+        //   <li>
+        //     <span>Wind Speed: ${hWindSpeed} mph</span>
+        //   </li>
+        //   <li>
+        //     <span>Wind Gusts: ${hWindGusts} mph</span>
+        //   </li>
+        // </li>`
+        // );
+
+        $(".storm-list").append(
+          `
+          <div class="left-panel-card list-group-item cat-${hCat} storm-number-${hNumber}">
+            <a data-toggle="collapse" href="#collapse${iteration}" aria-expanded="false" aria-controls="collapse${iteration}" class="${iteration}th-link collapsed">
+              <h5 class="storm-${hNumber}-h5 left-panel-card-header storm-name text-center stroke isHurricane${hOrNot}">${hName}</h5>
+            </a>
+            <div id="collapse${iteration}" class="collapse" role="tabpanel" aria-labelledby="heading${iteration}" data-parent="#accordion">
+              <div class="left-panel-card-body">
+              <ul class="storm-stats">
+              <li>
+                <span>Category: ${hCat}</span>
+              </li>
+              <li>
+                <span>Pressure: ${hPressure} mb</span>
+              </li>
+              <li>
+                <span>Wind Speed: ${hWindSpeed} mph</span>
+              </li>
+              <li>
+                <span>Wind Gusts: ${hWindGusts} mph</span>
+              </li>
+            </ul></div>
+            </div>
+          </div>
+        `
         );
 
         $("#tracking-container").append(
-          `<img class="storm-img storm-img-${hNumber}" src="${mapUrl}">`
+          `<img class="embed-responsive-item  storm-img storm-img-${hNumber}" src="${mapUrl}">`
         );
 
         //styling on selected storm
-        $(`.storm-number-${hNumber}`).on("click", () =>{
-          $(`.storm-name`).removeClass("selected-storm");
-          $(`#storm-list .storm-number-${hNumber} .storm-name`).addClass("selected-storm");
+        $(`.storm-${hNumber}-h5`).on("click", () =>{
+          $(`.left-panel-card-header`).removeClass("selected-storm");
+          $(`.storm-${hNumber}-h5`).addClass("selected-storm");
         });
+
+        $(`.storm-list .storm-number-${firstStorm} .storm-name`).addClass("selected-storm");
 
 
         //show windy storm window when corresponding storm name is clicked
@@ -105,11 +134,8 @@ $(document).ready(function($) {
 
       }); //end forEach hurricane
 
-      //show something (first storm from wu json response) on page load
-      $(`#storm-list .storm-number-${firstStorm} .storm-name`).addClass("selected-storm");
-      $(`.windy-${firstStorm}`).show();
-      $(`.storm-img-${firstStorm}`).show();
-
+        //click on first storm in list
+        $(".0th-link").trigger("click");
 
       function reload() {
         document.getElementById('iframeid').src += '';
