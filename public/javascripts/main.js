@@ -35,7 +35,18 @@ $(document).ready(function($) {
     url: "https://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
     dataType: "jsonp",
     success: function(parsed_json) {
+      if(parsed_json.currenthurricane.length === 0){
+        $("#windy-container").append(
+          `
+          <div id="no-storms-text">
+          <h2>Currently no storms reported.</h2>
+          <h3>Please check back later!</h3>
+          </div>
+          `
+        )
+      }
       console.log(parsed_json);
+      console.log(parsed_json.currenthurricane.length);
       const firstStorm = parsed_json.currenthurricane[0].stormInfo.stormNumber;
       $("#wu-map-img").attr("src", `https://icons.wunderground.com/data/images/${parsed_json.currenthurricane["0"].stormInfo.stormNumber}_5day.gif`);
 

@@ -469,3 +469,19 @@ div[data-toggle="toggle"] {
   text-align: center;
   border: 1px dashed darken($alt, 15%);
 }
+
+#no-storms-text{
+  text-align: center;
+position: absolute;
+top: 0%;
+left: 10%;
+border: 2px dashed red;
+padding: 50px;
+border-radius: 5px;
+}
+
+.navbar-nav .nav-item:hover{
+  background: $base;
+  a{color: #fff !important;}
+  border-radius: 5px;
+}
