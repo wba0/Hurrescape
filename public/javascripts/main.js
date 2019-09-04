@@ -32,7 +32,7 @@ $(document).ready(function($) {
   const windyUrl = $("#windy-iframe").attr("src");
 
   $.ajax({
-    url: "https://api.wunderground.com/api/f7b22f01665f4002/currenthurricane/view.json",
+    url: "https://api.wunderground.com/api/2b0d6572c90d3e4a/currenthurricane/view.json",
     dataType: "jsonp",
     success: function(parsed_json) {
       if(parsed_json.currenthurricane.length === 0){
